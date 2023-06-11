@@ -1,3 +1,14 @@
+//Write a program to create the singly linked list and perform the following operations.
+// a. Traverse
+// b. Insertion of a new node at the beginning. (before first node)
+// c. Insertion of a new node at the end of the list. (after last node)
+// d. Insertion of a new node after a given node.
+// e. Deletion of a beginning node. (first node)
+// f. Deletion of a last node.
+// g. Deletion after a given node.
+// h. Traversing and printing the elements in reverse order.
+// i. Traversing and printing alternate node elements. 
+
 #include <stdio.h>
 #include <stdlib.h>
 

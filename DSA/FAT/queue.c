@@ -1,3 +1,5 @@
+// Implement the Enqueue, Dequeue and display operations of queue data structure using arrays
+
 #include <stdio.h>
 #define size 5
 
@@ -58,5 +60,3 @@ int main(){
 
     return 0;
 }
-
-// https://pastecode.io/s/owfabtfc
