@@ -1,4 +1,4 @@
-// Implement Breadth First Traversal algorithm for a graph data structure.
+//Implement Depth First Traversal algorithm for a graph data structure. 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,38 +14,31 @@ struct Node *create_node(int data) {
   return node;
 };
 
-void breadth_first_search(struct Node *start) {
-  // Initialize the visited array to 0 for all nodes
+void depth_first_search(struct Node* start) {
   int visited[100] = {0};
 
-  // Create a queue for BFS
-  struct Node *visited_queue[100];
-  int front = -1;
-  int rear = -1;
+  struct Node* visited_stack[100];
+  int top = -1;
 
-  // Mark the start node as visited and enqueue it
   visited[start->data] = 1;
-  visited_queue[++rear] = start;
+  visited_stack[++top] = start;
 
-  // Loop until the queue is empty
-  while (front != rear) {
-    // Dequeue a node from the queue and print its value
-    struct Node *current_node = visited_queue[++front];
+  while(top != -1) {
+    struct Node* current_node = visited_stack[top--];
     printf("%d ", current_node->data);
 
-    // Enqueue all adjacent nodes of the dequeued node that have not been
-    // visited
-    for (int i = 0; i < 100; i++) {
-      if (current_node->adjacent[i] != NULL) {
-        struct Node *adjacent_node = current_node->adjacent[i];
-        if (visited[adjacent_node->data] == 0) {
+    for(int i = 0; i < 100; i++) {
+      if(current_node->adjacent[i] != NULL) {
+        struct Node* adjacent_node = current_node->adjacent[i];
+        if(visited[adjacent_node->data] == 0) {
           visited[adjacent_node->data] = 1;
-          visited_queue[++rear] = adjacent_node;
+          visited_stack[++top] = adjacent_node;
         }
       }
     }
   }
 }
+
 
 int main() {
   struct Node *a = create_node(0);
@@ -96,7 +89,7 @@ int main() {
 
   // Perform BFS starting from node a
   printf("BFS traversal: ");
-  breadth_first_search(d);
+  depth_first_search(d);
 
   return 0;
 }

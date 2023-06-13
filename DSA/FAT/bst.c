@@ -59,6 +59,26 @@ void postorder(struct Node *root) {
   printf("%d ", root->data);
 }
 
+void minimum_element(struct Node *root) {
+  if (root == NULL)
+    return;
+  if (root->left == NULL) {
+    printf("Minimum element is %d\n", root->data);
+  } else {
+    minimum_element(root->left);
+  }
+}
+
+void maximum_element(struct Node *root) {
+  if (root == NULL)
+    return;
+  if (root->right == NULL) {
+    printf("Maximum element is %d\n", root->data);
+  } else {
+    maximum_element(root->right);
+  }
+}
+
 
 struct BST *create_bst() {
   struct BST *bst = (struct BST *)malloc(sizeof(struct BST));
