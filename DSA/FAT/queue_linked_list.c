@@ -8,67 +8,77 @@ struct Node {
   struct Node *next;
 };
 
+struct Node *create_node(int data) {
+  struct Node *node = (struct Node *)malloc(sizeof(struct Node));
+  node->data = data;
+  node->next = NULL;
+  return node;
+}
+
 struct Queue {
-  struct Node *front, *rear;
+  struct Node *rear;
+  struct Node *front;
 };
 
-void enqueue(struct Queue *q, int element) {
-  struct Node *node = (struct Node *)malloc(sizeof(struct Node));
-  node->data = element;
-  node->next = NULL;
-
-  if (q->rear == NULL) {
-    q->front = q->rear = node;
-    return;
+void enqueue(struct Queue *q, int data) {
+  struct Node *node = create_node(data);
+  if (node == NULL) {
+    printf("No memory left. Queue overflow. Cannot enqueue: %d\n", data);
   }
 
+  if (q->rear == NULL) {
+    q->rear = q->front = node;
+    return;
+  }
   q->rear->next = node;
   q->rear = node;
 }
 
 int dequeue(struct Queue *q) {
-  if (q->front == NULL) {
-    printf("Queue underflow");
+  if (q->front == NULL && q->rear == NULL) {
+    printf("Queue underflow. Queue is empty.\n");
     return -1;
   }
 
-  struct Node *node_to_remove = q->front;
-  q->front = q->front->next;
-
-  if (q->front == NULL)
+  struct Node *node = q->front;
+  int e = node->data;
+  q->front = node->next;
+  
+  if(q->front == NULL) {
     q->rear = NULL;
+  }
 
-  int e = node_to_remove->data;
-
-  free(node_to_remove);
-
+  free(node);
   return e;
 }
 
-void display(struct Queue *queue) {
-  struct Node *current = queue -> front;
-  while (current != NULL) {
-    printf("%d ", current -> data);
-    current = current -> next;
+void display(struct Queue *q) {
+  struct Node *current_node = q->front;
+  while (current_node != q->rear) {
+    printf("%d ", current_node->data);
+    current_node = current_node->next;
   }
+  printf("%d", q->rear->data);
   printf("\n");
 }
 
 int main() {
+  struct Queue *q = (struct Queue *)malloc(sizeof(struct Queue));
+  q->rear = NULL;
+  q->front = NULL;
 
-  struct Queue *queue = (struct Queue *)malloc(sizeof(struct Queue));
-
-  enqueue(queue, 10);
-  enqueue(queue, 20);
-  enqueue(queue, 30);
-  int e =dequeue(queue);
-  printf("Element removed is: %d\n", e);
-  enqueue(queue, 40);
-  display(queue);
-  dequeue(queue);
-  dequeue(queue);
-  dequeue(queue);
-  dequeue(queue);
-
-  return 0;
+  enqueue(q, 10);
+  enqueue(q, 20);
+  enqueue(q, 30);
+  enqueue(q, 40);
+  enqueue(q, 50);
+  enqueue(q, 69);
+  display(q);
+  printf("We are dequeuing: %d\n", dequeue(q));
+  printf("We are dequeuing: %d\n", dequeue(q));
+  printf("We are dequeuing: %d\n", dequeue(q));
+  printf("We are dequeuing: %d\n", dequeue(q));
+  printf("We are dequeuing: %d\n", dequeue(q));
+  printf("We are dequeuing: %d\n", dequeue(q));
 }
+
