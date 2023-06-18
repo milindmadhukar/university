@@ -7,13 +7,14 @@ int main()
     // int arr[8] = {34, 56, 67, 81, 109, 220, 312, 512}; // Best
     int arr[8] = {512, 312, 220, 109, 81, 67, 56, 34}; // Worst
     // int arr[8] = {512, 312, 220, 109, 67, 34, 81, 56}; // Average
+    int n = sizeof(arr) / sizeof(arr[0]);
 
     double start, end, time_spent;
     start = clock();
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < 7 - i; j++)
+        for (int j = 0; j < n - i; j++)
         {
             if (arr[j] > arr[j + 1])
             {

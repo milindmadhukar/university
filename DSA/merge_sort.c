@@ -4,7 +4,9 @@ void mergeSort(int arr[], int l, int r);
 
 int main() {
   int arr[10] = {10, 4, 43, 345, 63, 635, 1, 34, 54, 23};
+
   mergeSort(arr, 0, 9);
+
   for (int i = 0; i < 10; i++)
     printf("%d, ", arr[i]);
   printf("\n");
