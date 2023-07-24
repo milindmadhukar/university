@@ -65,7 +65,7 @@ bool is_valid(char str[100]) {
         return false;
       char opposite_brac = get_opposite_bracket(popped_char);
 
-      while (top != -1) {
+      while (is_empty()) {
         char bracket = pop();
         if (is_opening_bracket(bracket) && bracket == opposite_brac)
           continue;
@@ -74,11 +74,11 @@ bool is_valid(char str[100]) {
       }
     }
   }
-  return top == -1;
+  return is_empty();
 }
 
 int main() {
-  char expression[1000] = "{]}";
+  char expression[1000] = "[{({}[]({})}]"; // TODO: Does not work. Fix.
   bool valid = is_valid(expression);
   if (valid) {
     printf("Expression toh jainwin");

@@ -127,7 +127,7 @@ int main() {
   inorder(bst->root);
   printf("\n");
 
-  deleteNode(bst -> root, 65);
+  deleteNode(bst->root, 65);
 
   inorder(bst->root);
 

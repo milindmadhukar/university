@@ -1,27 +1,22 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
+  int arr[8] = {512, 10, 220, 109, 81, 67, 56, 34}; // Worst
 
-    // int arr[8] = {34, 56, 67, 81, 109, 220, 312, 512}; // Best
-    int arr[8] = {512, 312, 220, 109, 81, 67, 56, 34}; // Worst
-    // int arr[8] = {512, 312, 220, 109, 67, 34, 81, 56}; // Average
-
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = i+1; j < 8; j++)
-        {
-            if (arr[j] < arr[i])
-            {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
+  for (int i = 0; i < 8; i++) {
+    int smallest_index = i;
+    for (int j = i + 1; j < 8; j++) {
+      if (arr[j] < arr[smallest_index]) {
+        smallest_index = j;
+      }
     }
+    int temp = arr[i];
+    arr[i] = arr[smallest_index];
+    arr[smallest_index] = temp;
+  }
 
-    printf("Sorted array is: ");
-    for (int k = 0; k < 8; k++){
-        printf("%d, ", arr[k]);
-    }
+  for (int i = 0; i < 8; i++) {
+    printf("%d, ", arr[i]);
+  }
 }
+

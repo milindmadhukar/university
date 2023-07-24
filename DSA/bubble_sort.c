@@ -1,37 +1,21 @@
 #include <stdio.h>
-#include <time.h>
 
-int main()
-{
-
-    // int arr[8] = {34, 56, 67, 81, 109, 220, 312, 512}; // Best
-    int arr[8] = {512, 312, 220, 109, 81, 67, 56, 34}; // Worst
-    // int arr[8] = {512, 312, 220, 109, 67, 34, 81, 56}; // Average
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    double start, end, time_spent;
-    start = clock();
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n - i; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                int temp = arr[j+1];
-                arr[j + 1] = arr[j];
-                arr[j] = temp;
-            }
-        }
+int main() {
+  int arr[8] = {512, 10, 220, 109, 81, 67, 56, 34}; // Worst
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8 - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        int temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
     }
+  }
 
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+  for (int i = 0; i < 8; i++) {
+    printf("%d, ", arr[i]);
+  }
 
-    printf("Sorted array is: ");
-    for (int k = 0; k < 8; k++){
-        printf("%d, ", arr[k]);
-    }
-
-    printf("\nTime spent to sort (in ms): %lf\n", time_spent*1000);
+  return 0;
 }
+
