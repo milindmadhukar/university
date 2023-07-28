@@ -6,5 +6,7 @@ class HelloWorld {
     System.out.println("Enter a");
     int a = sc.nextInt();
     System.out.println("why u enter: " + a); 
+
+    sc.close();
   }
 }
