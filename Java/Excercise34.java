@@ -182,10 +182,14 @@ class Main {
 
     Institution.Department d = new Institution.Department(1, "CSE", "Blockchain");
 
+
     // call addStudent
     String[] courses = { "CSE101L", "CSE102L" };
     d.addStudent(1, 19, "Milind", courses);
     d.addStudent(2, 20, "Martin Garrix", courses);
+
+    Institution.Department.Student s = new Institution.Department.Student(3, 20, "Test", courses);
+    s.display();
 
     System.out.println();
 
