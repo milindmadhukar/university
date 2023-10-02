@@ -114,6 +114,7 @@
 // Output format: Integer converted from a string
 //
 // Note: Use Integer.parseInt( )
+
 import java.util.Scanner;
 
 class Excercise23 {

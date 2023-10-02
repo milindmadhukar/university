@@ -41,6 +41,7 @@
 // 5. Demonstrate polymorphism by creating an array of "Vehicle" objects and initialize it with instances of both "Car" and "Bicycle." Then, iterate through the array and call the "start" method for each vehicle.
 //
 // Note: Create an instance for the abstract base class using the dynamic method instance
+
 abstract class Vehicle {
   String vehicleType;
   String model;

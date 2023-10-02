@@ -17,11 +17,13 @@
 //
 // Furthermore, within each "Department," define another inner class named "Student" as a static class. The "Student" class should have attributes like student ID, name, age, and courses enrolled. Use the constructor to initialize the value. Implement methods to add new students to the department, enroll them in courses, and display student information.
 //
-// In the driver class, create an object of outer and inner class, access the static nested classes using the outer class name, invoke the methods of inner class using inner class objects.import java.util.Date;
-// import java.util.Scanner;
-// import java.time.LocalDate;
-// import java.time.Period;
-// import java.text.SimpleDateFormat;
+// In the driver class, create an object of outer and inner class, access the static nested classes using the outer class name, invoke the methods of inner class using inner class objects.
+
+import java.util.Date;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Period;
+import java.text.SimpleDateFormat;
 
 class Program1 {
   Date startDate, endDate;
