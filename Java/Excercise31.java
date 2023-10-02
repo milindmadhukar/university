@@ -1,4 +1,97 @@
-import java.util.Scanner;
+// 1. Write a Java program to Create a class named Innings with the following public member variables / Attributes
+//
+//
+//
+// Include a method in the class named displaylnningsDetails.In This method, display The details of The innings in The format shown in The sample output. This method does not accept any arguments and its return type is void.
+//
+// Create another class named Main and write a main method to test the above class.
+//
+// Input Format
+//
+// The First line Consists of a String
+//
+// The Second line consists of a String that represents the batting team The next Line consists of a Long that represents how many runs scored
+//
+// Output Format
+//
+// The Output Should display the InningsDetails
+//
+// Sample Input:
+// First Innings
+// IND
+// 190
+//
+// Sample Output:
+// Innings Details
+// Innings number: First Innings
+// Batting Team: IND
+// Run Scored: 190
+//
+// 2. 
+//
+// A CSE student has to study theory and lab courses each semester. Each course has a code (e.g. 19Z311) and a title (“Object-oriented Programming Laboratory”).
+//
+// Each theory course has the following continuous assessment (CA) components:
+//
+//
+// Each lab course has the following continuous assessment (CA) components:
+//
+//
+//
+// Design a single class to represent a theory as well as a lab course. Create instance variables for “Course code”, “Course title”, and “Total Marks”
+//
+// Create 2 user-defined methods:
+// 1. Calculate the total marks for the theory course from the components of Table 1 and Table 2.
+// 2. Calculate the total marks for the lab course from the components of Table 3 and Table 4.
+//
+// Input Format:
+//
+// The first line of the input contains the total number of courses in the semester(Theorycourse and Labcourse) followed by the next line of the Enter the Theorycourse or Labcourse. For Theorycourse user can be given the following inputs:-
+//
+// 1. Enter the course code.
+//
+// 2. Enter the course Title.
+//
+// 3. Enter the test 1 Mark.
+//
+// 4. Enter the test 2 Mark.
+//
+// 5. Enter the test 3 mark.
+//
+// 6. Enter the Assignment Presentation, Mark.
+//
+// 7. Enter the Objective Test Mark 1.
+//
+// 8. Enter the Objective Test Mark 1.
+//
+// 9. Enter the Final Exam Mark.
+//
+// For Labcourse users can be given the following inputs:- 1. Enter the course code.
+//
+// 2. Enter the course Title.
+//
+// 3. Enter the Observation 1 Mark.
+//
+// 4. Enter the Individual Report 1 Mark.
+//
+// 5. Enter the Observation 2 Mark.
+//
+// 6. Enter the Individual Report 2 Mark.
+//
+// 7. Enter the viva voice, Mark.
+//
+// 8. Enter the Final Exam Mark.
+//
+// Output Format:
+//
+// Course code: 19ML119
+// Course Title: Machine Learning
+// Total Marks: 77.5
+//
+// Course code: 19CC118
+// Course Title: Cloud Computing
+// Total marks: 83.5import java.util.Scanner;
+
 import java.util.Arrays;
 
 class Innings {

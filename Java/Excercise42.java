@@ -1,3 +1,11 @@
+// 1.  A bank has three types of customers: savings account customers, checking account customers, and loan account customers.
+//
+// Create a base class called Customer and store all the basic details of the customer, such as name, address, and mobile number. In the base class, create a display() method to display the details of the customer. Then, create three derived classes for the three types of customers: SavingsAccount, CheckingAccount, and LoanAccount.
+// In the SavingsAccount class, create a method to check the account balance and calculate the interest rate. The interest rate should be fixed with a withdrawal limit. Create two functions: one to check the balance and give a warning message if the balance is less than 5000, and the other to override the display() method from the base class to display the details of the account.
+// In the CheckingAccount class, create a monthfeecal() method to calculate the monthly fee from the customer. This fee can be reduced from the account balance at the end of every month. The monthfeecal() method should override the display() method from the base class to display the details of the account.
+// In the LoanAccount class, every month, the loan amount will be recovered from the savings account of the customer. The display() method should override the display() method from the base class to display the details of the account.
+// In the main method, the details of the customer should be accessed based on the account number if the account start with SV121212 then it be saving account similar the account number can be classified . The appropriate class object should then be invoked.
+ 
 import java.util.Scanner;
 
 class Customer {

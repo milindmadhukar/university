@@ -11,4 +11,4 @@ class StringBufferPrac {
     System.out.println(sb);
     System.out.println(sb.capacity());
   }
-}
+

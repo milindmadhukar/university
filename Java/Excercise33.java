@@ -1,4 +1,30 @@
-import java.lang.reflect.Constructor;
+// 1.  Write a Java program to create a class named Student that has the following fields in private: name (String), rollNo (int), marks (double array of size 5), and average (double). The class should have the following methods:
+//
+// A static method named calculateAverage takes a type double in an array as a parameter and returns the average of its elements.
+//
+// A default constructor that initializes the name to “Unknown”, rollNo to 0, marks to {0, 0, 0, 0, 0}, and average to 0.
+//
+// A parameterized constructor that takes a String, an int, and a double array as parameters and assigns them to the name, rollNo, and marks fields respectively. It should also call the calculateAverage method and assign its return value to the average field.
+//
+// A copy constructor that takes another Student object as a parameter and copies its fields to the current object.
+//
+// A toString method that returns a String representation of the Student object in the format: “Name: name, Roll No: rollNo, Marks: marks[0], marks1, marks2, marks3, marks4, Average: average”.
+//
+// Create a driver class, declare main method and create an array of Student objects of size 3 and initialize them using different constructors. It should then display the details of each Student object using the toString method.
+//
+//
+//
+// 2. Write a Java program to create a class named Employee that has the following fields: name (String), id (int), salary (double), and bonus (double). The class should have the following methods:
+//
+// A private default constructor that initializes the name to “Unknown”, id to 0, salary to 0, and bonus to 0.
+//
+// A private parameterized constructor that takes a String, an int, and a double as parameters and assigns them to the name, id, and salary fields respectively. It should also calculate the bonus as 10% of the salary and assign it to the bonus field.
+//
+// A toString method that returns a String representation of the Employee object in the format: “Name: name, ID: id, Salary: salary, Bonus: bonus”.
+//
+// Write a driver class that should create two Employee objects and invoke the constructors using reflection and displays their details using the toString method.
+//
+// import java.lang.reflect.Constructor;
 
 class Student {
   private String name;

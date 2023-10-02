@@ -1,8 +1,27 @@
-import java.util.Date;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.Period;
-import java.text.SimpleDateFormat;
+// 1. Write a program in Java to create two date objects. One for startDate and another endDate. Then calculate the difference between the two dates in milliseconds. Finally, converts the difference in milliseconds to days and prints the number of days, hours, minutes, and seconds between the two days. 
+//
+// Note: Use the appropriate methods of the Date class
+//
+// 2. Write a Java program that prompts the user to enter their date of birth in the format dd/mm/yyyy and displays their age in years, months, and days as of today
+//
+// Note: Use LocalDate, Period class, and its methods
+//
+// 3. Write a program that generates a random date between January 1, 2020, and December 31, 2020, and displays it in the format dd/mm/yyyy. Use the Math.random() method to generate random numbers.
+//
+// Note: Use LocalDate, Random class, and ofEpoch( ) method
+//
+// Use parse( ) method in all the programs to format the date and time
+//
+//
+//  Design a Java program that simulates a multi-level educational institution's enrollment system using nested classes. Create an outer class named "Institution" that contains information about the institution such as its name and location in private. Declare a constructor for the outer class and initialize the value from the object. Inside the "Institution" class, define a static inner class named "Department" to represent various academic departments within the institution. Each "Department" should have a unique ID, name, and specialization in private and it should initialized through the constructor from the object.
+//
+// Furthermore, within each "Department," define another inner class named "Student" as a static class. The "Student" class should have attributes like student ID, name, age, and courses enrolled. Use the constructor to initialize the value. Implement methods to add new students to the department, enroll them in courses, and display student information.
+//
+// In the driver class, create an object of outer and inner class, access the static nested classes using the outer class name, invoke the methods of inner class using inner class objects.import java.util.Date;
+// import java.util.Scanner;
+// import java.time.LocalDate;
+// import java.time.Period;
+// import java.text.SimpleDateFormat;
 
 class Program1 {
   Date startDate, endDate;
