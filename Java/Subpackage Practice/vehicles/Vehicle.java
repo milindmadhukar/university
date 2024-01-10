@@ -1,5 +1,3 @@
-  // Create a class as Vehicle in the myapp.vehicles package. This class contains properties such as brand and model, and methods like display to print the properties, start and stop method to start and stop the vehicle.
-
 package myapp.vehicles;
 
 public class Vehicle {

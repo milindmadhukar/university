@@ -60,14 +60,6 @@ void dijkstra(struct Node *start) {
       current = NULL;
     }
   }
-
-  // Print distances from the start node to each node
-  for (int i = 0; i < 10; i++) {
-    if (start->adjacents[i] != NULL) {
-      printf("%c: %d\n", start->adjacents[i]->to->data,
-             start->adjacents[i]->to->distance);
-    }
-  }
 }
 
 
@@ -80,61 +72,82 @@ int main() {
   struct Node *f = create_node('F');
   struct Node *g = create_node('G');
 
-  struct Adjacent ab = {b, 2};
-  struct Adjacent ad = {d, 3};
-  struct Adjacent ba = {a, 2};
-  struct Adjacent bd = {d, 6};
-  struct Adjacent bc = {c, 8};
-  struct Adjacent be = {e, 4};
-  struct Adjacent cb = {b, 8};
-  struct Adjacent cd = {d, 5};
-  struct Adjacent ce = {e, 3};
-  struct Adjacent cf = {f, 2};
-  struct Adjacent da = {a, 3};
-  struct Adjacent db = {b, 6};
-  struct Adjacent dc = {c, 5};
-  struct Adjacent de = {e, 4};
-  struct Adjacent ed = {d, 4};
-  struct Adjacent eb = {b, 4};
-  struct Adjacent ec = {c, 3};
-  struct Adjacent ef = {f, 7};
-  struct Adjacent fc = {c, 2};
-  struct Adjacent fe = {e, 7};
-  struct Adjacent fg = {g, 5};
-  struct Adjacent gf = {f, 5};
+  // struct Adjacent ab = {b, 2};
+  // struct Adjacent ad = {d, 3};
+  // struct Adjacent ba = {a, 2};
+  // struct Adjacent bd = {d, 6};
+  // struct Adjacent bc = {c, 8};
+  // struct Adjacent be = {e, 4};
+  // struct Adjacent cb = {b, 8};
+  // struct Adjacent cd = {d, 5};
+  // struct Adjacent ce = {e, 3};
+  // struct Adjacent cf = {f, 2};
+  // struct Adjacent da = {a, 3};
+  // struct Adjacent db = {b, 6};
+  // struct Adjacent dc = {c, 5};
+  // struct Adjacent de = {e, 4};
+  // struct Adjacent ed = {d, 4};
+  // struct Adjacent eb = {b, 4};
+  // struct Adjacent ec = {c, 3};
+  // struct Adjacent ef = {f, 7};
+  // struct Adjacent fc = {c, 2};
+  // struct Adjacent fe = {e, 7};
+  // struct Adjacent fg = {g, 5};
+  // struct Adjacent gf = {f, 5};
+  struct Adjacent af = {f, 10};
+  struct Adjacent ab = {b, 28};
+  struct Adjacent bg = {g, 14};
+  struct Adjacent bc = {c, 16};
+  struct Adjacent cd = {d, 12};
+  struct Adjacent de = {e, 22};
+  struct Adjacent eg = {g, 24};
+  struct Adjacent ef = {f, 25};
+  struct Adjacent gd = {d, 18};
 
-  a->adjacents[0] = &ab;
-  a->adjacents[1] = &ad;
 
-  b->adjacents[0] = &ba;
-  b->adjacents[1] = &bd;
-  b->adjacents[2] = &bc;
-  b->adjacents[3] = &be;
 
-  c->adjacents[0] = &cb;
-  c->adjacents[1] = &cd;
-  c->adjacents[2] = &ce;
-  c->adjacents[3] = &cf;
+  a->adjacents[0] = &af;
+  a->adjacents[1] = &ab;
 
-  d->adjacents[0] = &da;
-  d->adjacents[1] = &db;
-  d->adjacents[2] = &dc;
-  d->adjacents[3] = &de;
+  b->adjacents[0] = &bg;
+  b->adjacents[1] = &bc;
+  b->adjacents[2] = &ab;
 
-  e->adjacents[0] = &ed;
-  e->adjacents[1] = &eb;
-  e->adjacents[2] = &ec;
-  e->adjacents[3] = &ef;
+  c->adjacents[0] = &cd;
+  c->adjacents[1] = &bc;
 
-  f->adjacents[0] = &fc;
-  f->adjacents[1] = &fe;
-  f->adjacents[2] = &fg;
+  d->adjacents[0] = &de;
+  d->adjacents[1] = &cd;
+  d->adjacents[2] = &gd;
 
-  g->adjacents[0] = &gf;
+  e->adjacents[0] = &eg;
+  e->adjacents[1] = &de;
+
+  f->adjacents[0] = &ef;
+  f->adjacents[1] = &af;
+
+  g->adjacents[0] = &gd;
+  g->adjacents[1] = &bg;
+  g->adjacents[2] = &eg;
 
   dijkstra(a);
 
   // Print distances from the start node to each node
+  
+  printf("%s : %d", "A", a->distance);
+  printf("\n");
+  printf("%s : %d", "B", b->distance);
+  printf("\n");
+  printf("%s : %d", "C", c->distance);
+  printf("\n");
+  printf("%s : %d", "D", d->distance);
+  printf("\n");
+  printf("%s : %d", "E", e->distance);
+  printf("\n");
+  printf("%s : %d", "F", f->distance);
+  printf("\n");
+  printf("%s : %d", "G", g->distance);
+  printf("\n");
 
   return 0;
 }

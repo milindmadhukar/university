@@ -1,5 +1,3 @@
-   // Additionally, define an Engine class in the myapp.vehicles package. This class has a property type and methods for starting and stopping the engine.
-
 package myapp.vehicles;
 
 public class Engine {

@@ -67,6 +67,11 @@ class BMIcalculator {
     height = this.height;
   }
 
+  public void displayBMI() {
+    grade = calculateGrade();
+    System.out.println("BMI grade: " + grade);
+  }
+
   private double calculateBMI() {
     return weight / (height * height);
   }
@@ -83,11 +88,6 @@ class BMIcalculator {
       return "Overweight [O]";
     }
   }
-
-  public void displayBMI() {
-    grade = calculateGrade();
-    System.out.println("BMI grade: " + grade);
-  }
 }
 
 class Stock {
@@ -102,10 +102,6 @@ class Stock {
     this.name = name;
   }
 
-  private double getChangePercentage() {
-    return (currentPrice - previousClosingPrice) / previousClosingPrice;
-  }
-
   public void displayStock(double previousClose, double current) {
     previousClosingPrice = previousClose;
     currentPrice = current;
@@ -114,6 +110,10 @@ class Stock {
     System.out.println("Previous closing price: " + previousClosingPrice);
     System.out.println("Current price: " + currentPrice);
     System.out.println("Percentage Change: " + getChangePercentage());
+  }
+
+  private double getChangePercentage() {
+    return (currentPrice - previousClosingPrice) / previousClosingPrice;
   }
 
 }

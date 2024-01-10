@@ -45,6 +45,7 @@ class Student {
     this.rollNo = 0;
     this.marks = new double[5];
     this.average = 0;
+
   }
 
   public Student(String name, int rollNo, double[] marks) {

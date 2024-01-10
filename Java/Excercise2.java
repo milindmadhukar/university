@@ -14,7 +14,6 @@ class Excercise2 {
   }
 
   void program1() {
-
     System.out.print("Enter number of students: ");
     int num_of_students = sc.nextInt();
 
