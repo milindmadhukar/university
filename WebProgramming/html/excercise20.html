@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Assignment Upload</h1>
+    <form>
+      <label for="assignment_title">Assignment Title:</label>
+      <input
+        type="text"
+        id="assignment_title"
+        name="assignment_title"
+        required
+      /><br /><br />
+
+      <label for="course_name">Course Name:</label>
+      <input
+        type="text"
+        id="course_name"
+        name="course_name"
+        required
+      /><br /><br />
+
+      <label for="due_date">Due Date:</label>
+      <input type="date" id="due_date" name="due_date" required /><br /><br />
+
+      <label for="file_upload">File Upload:</label>
+      <input
+        type="file"
+        id="file_upload"
+        name="file_upload[]"
+        multiple
+      /><br /><br />
+
+      <label for="instructions">Instructions:</label><br />
+      <textarea
+        id="instructions"
+        name="instructions"
+        rows="4"
+        cols="50"
+        required
+      ></textarea
+      ><br /><br />
+
+      <label for="deadline_reminders">Deadline Reminders:</label><br />
+      <input
+        type="checkbox"
+        id="deadline_reminders"
+        name="deadline_reminders"
+        value="yes"
+      />
+      <label for="deadline_reminders">Send me deadline reminders</label
+      ><br /><br />
+
+      <input type="submit" value="Submit Assignment" />
+    </form>
+  </body>
+</html>

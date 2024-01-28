@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Feedback Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <style>
+    .laal-text {
+      color: red;
+    }
+  </style>
+
+  <body>
+    <form>
+      <h1>Feedback Form</h1>
+
+      <h2 class="laal-text">Company</h2>
+      <label for="company_rating">Rate the company:</label>
+      <input
+        type="range"
+        id="company_rating"
+        name="company_rating"
+        min="1"
+        max="5"
+        step="1"
+      />
+
+      <h2 class="laal-text">Roles</h2>
+      <label for="role_satisfaction"
+        >Rate your satisfaction with your role:</label
+      >
+      <input
+        type="range"
+        id="role_satisfaction"
+        name="role_satisfaction"
+        min="1"
+        max="5"
+        step="1"
+      />
+
+      <h2 class="laal-text">Work Environment</h2>
+      <label for="work_environment_rating">Rate the work environment:</label>
+      <input
+        type="range"
+        id="work_environment_rating"
+        name="work_environment_rating"
+        min="1"
+        max="5"
+        step="1"
+      />
+
+      <h2 class="laal-text">Opinions and Suggestions</h2>
+      <label for="opinions">Share your opinions and suggestions:</label>
+      <textarea id="opinions" name="opinions" rows="5" cols="50"></textarea>
+
+      <h2 class="laal-text">Multiple Choice</h2>
+      <label for="favorite_department">Select your favorite department:</label>
+      <select id="favorite_department" name="favorite_department">
+        <option value="1">Sales</option>
+        <option value="2">Marketing</option>
+        <option value="3">Finance</option>
+        <option value="4">Human Resources</option>
+        <option value="5">Operations</option>
+      </select>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

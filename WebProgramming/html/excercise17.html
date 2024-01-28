@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Registration Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <h1>Registration Form</h1>
+
+    <form action="submit.php" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <br />
+
+      <label for="department">Department:</label>
+      <select id="department" name="department" required>
+        <option value="">Select Department</option>
+        <option value="HR">Human Resources</option>
+        <option value="IT">Information Technology</option>
+        <option value="Finance">Finance</option>
+        <option value="Marketing">Marketing</option>
+      </select>
+
+      <br />
+
+      <label for="gender">Gender:</label>
+
+      <br />
+      <input type="radio" id="male" name="gender" value="male" required />
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="female" required />
+      <label for="female">Female</label>
+
+      <br />
+
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Leave Request Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Leave Request Form</h1>
+    <form>
+      <label for="leave-type">Leave Type:</label>
+      <select id="leave-type" name="leave-type">
+        <option value="vacation">Vacation</option>
+        <option value="sick-leave">Sick Leave</option>
+        <option value="personal">Personal</option>
+      </select>
+      <br />
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" name="start-date" />
+      <br />
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" name="end-date" />
+      <br />
+      <label for="reason">Reason for Leave:</label>
+      <br />
+      <textarea id="reason" name="reason" rows="4" cols="50"></textarea>
+      <br />
+      <label for="manager-approval">Manager Approval:</label>
+      <input type="checkbox" id="manager-approval" name="manager-approval" />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
