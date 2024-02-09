@@ -63,6 +63,11 @@ int main() {
   SubarrayInfo max_info = maximum_subarray(arr, 0, size - 1);
   std::cout << "Maximum subarray sum: " << max_info.sum << std::endl;
   std::cout << "Start index: " << max_info.start << ", End index: " << max_info.end << std::endl;
+  std::cout << "Subarray: [";
+  for(int i = max_info.start; i <= max_info.end; i++) {
+    std::cout << arr[i] << ", ";
+  }
+  std::cout << "]";
   return 0;
 }
 

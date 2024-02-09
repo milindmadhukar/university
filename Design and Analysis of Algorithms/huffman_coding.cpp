@@ -1,22 +1,15 @@
-// C++(STL) program for Huffman Coding with STL
 #include <bits/stdc++.h>
+#include <cstring>
 using namespace std;
+
+unordered_map<char, string> codes;
 
 // A Huffman tree node
 struct MinHeapNode {
-
-  // One of the input characters
   char data;
-
-  // Frequency of the character
   unsigned freq;
-
-  // Left and right child
   MinHeapNode *left, *right;
-
-  MinHeapNode(char data, unsigned freq)
-
-  {
+  MinHeapNode(char data, unsigned freq) {
 
     left = right = NULL;
     this->data = data;
@@ -24,34 +17,29 @@ struct MinHeapNode {
   }
 };
 
-// For comparison of
-// two heap nodes (needed in min heap)
 struct compare {
 
-  bool operator()(MinHeapNode *l, MinHeapNode *r)
-
-  {
+  bool operator()(MinHeapNode *l, MinHeapNode *r) {
     return (l->freq > r->freq);
   }
 };
 
-// Prints huffman codes from
-// the root of Huffman Tree.
-void printCodes(struct MinHeapNode *root, string str) {
+void saveCodes(struct MinHeapNode *root, string str) {
 
   if (!root)
     return;
 
-  if (root->data != '$')
-    cout << root->data << ": " << str << "\n";
+  if (root->data != '$') {
+    codes[root->data] = str;
+  }
 
-  printCodes(root->left, str + "0");
-  printCodes(root->right, str + "1");
+  saveCodes(root->left, str + "0");
+  saveCodes(root->right, str + "1");
 }
 
 // The main function that builds a Huffman Tree and
 // print codes by traversing the built Huffman Tree
-void HuffmanCodes(char data[], int freq[], int size) {
+MinHeapNode *HuffmanCodes(char data[], int freq[], int size) {
   struct MinHeapNode *left, *right, *top;
 
   // Create a min heap & inserts all characters of data[]
@@ -88,10 +76,29 @@ void HuffmanCodes(char data[], int freq[], int size) {
 
   // Print Huffman codes using
   // the Huffman tree built above
-  printCodes(minHeap.top(), "");
+  saveCodes(minHeap.top(), "");
+
+  return top;
 }
 
-// Driver Code
+string decodeHuffman(struct MinHeapNode *root, string s) {
+  string ans = "";
+  struct MinHeapNode *curr = root;
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] == '0')
+      curr = curr->left;
+    else
+      curr = curr->right;
+
+    // reached leaf node
+    if (curr->left == NULL and curr->right == NULL) {
+      ans += curr->data;
+      curr = root;
+    }
+  }
+  return ans + '\0';
+}
+
 int main() {
 
   char arr[] = {'c', 'd', 'g', 'u', 'm', 'a'};
@@ -99,8 +106,22 @@ int main() {
 
   int size = sizeof(arr) / sizeof(arr[0]);
 
-  HuffmanCodes(arr, freq, size);
+  MinHeapNode *root = HuffmanCodes(arr, freq, size);
+
+  int total_bits = 0;
+
+  for (auto code : codes) {
+    total_bits += code.second.length();
+    cout << code.first << " - " << code.second << std::endl;
+  }
+
+  std::cout << "Total number of bits required to store this file is: "
+            << total_bits << std::endl;
+
+  string encoded_message = "0101101101001";
+  std::string original_message = decodeHuffman(root, encoded_message);
+
+  std::cout << "Original message: " << original_message << std::endl;
 
   return 0;
 }
-

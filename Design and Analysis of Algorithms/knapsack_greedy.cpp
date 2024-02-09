@@ -56,5 +56,16 @@ int main() {
 
   std::cout << "Total profit: " << total_profit << std::endl;
 
+  for (int i = 0; i < size; i++) {
+    std::cout << "Item " << i + 1 << ": ";
+    if (weights[i] <= capacity) {
+      std::cout << "1" << std::endl;
+      capacity -= weights[i];
+    } else {
+      std::cout << (float)capacity / weights[i] << std::endl;
+      capacity = 0;
+    }
+  }
+
   return 0;
 }
