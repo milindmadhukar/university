@@ -7,10 +7,10 @@ int lcs(const std::string &X, const std::string &Y, int m, int n) {
     for (int j = 0; j <= n; j++) {
       if (i == 0 || j == 0) {
         dp[i][j] = 0;
-      } else if (X[i-1] == Y[j-1]) {
-        dp[i][j] = dp[i-1][j-1] + 1;
+      } else if (X[i - 1] == Y[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
       } else {
-        dp[i][j] = std::max(dp[i-1][j], dp[i][j-1]);
+        dp[i][j] = std::max(dp[i - 1][j], dp[i][j - 1]);
       }
     }
   }
@@ -18,13 +18,13 @@ int lcs(const std::string &X, const std::string &Y, int m, int n) {
 }
 
 void find_sequence(const std::string &X, int m, int n) {
-  if (dp[m][n] == dp[m-1][n]) { // up
-    find_sequence(X, m-1, n);
-  } else if (dp[m][n] == dp[m][n-1]) { // left
-    find_sequence(X, m, n-1);
-  } else if (dp[m][n] == dp[m-1][n-1] + 1) { // diagonal
-    find_sequence(X, m-1, n-1);
-    std::cout << X[m-1];
+  if (dp[m][n] == dp[m - 1][n]) { // up
+    find_sequence(X, m - 1, n);
+  } else if (dp[m][n] == dp[m][n - 1]) { // left
+    find_sequence(X, m, n - 1);
+  } else if (dp[m][n] == dp[m - 1][n - 1] + 1) { // diagonal
+    find_sequence(X, m - 1, n - 1);
+    std::cout << X[m - 1];
   }
 }
 
