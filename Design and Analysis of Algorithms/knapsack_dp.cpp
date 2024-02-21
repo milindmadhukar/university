@@ -1,19 +1,16 @@
 #include <bits/stdc++.h>
-using namespace std;
 
 int dp[100][100];
 
 int knapSack(int W, int weights[], int profits[], int n) {
   memset(dp, 0, sizeof(dp));
 
-  for (int i = 0; i <= n; i++) {
-    for (int w = 0; w <= W; w++) {
-      if (i == 0 || w == 0) {
-        dp[i][w] = 0;
-      } else if (weights[i - 1] > w) {
+  for (int i = 1; i <= n; i++) {
+    for (int w = 1; w <= W; w++) {
+      if (weights[i - 1] > w) {
         dp[i][w] = dp[i - 1][w];
       } else {
-        dp[i][w] = max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
+        dp[i][w] = std::max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
       }
     }
   }
@@ -27,7 +24,7 @@ void printSelectedItems(int n, int W, int total_profit, int weights[], int profi
     if (total_profit == dp[i - 1][w]) {
       continue;
     } else {
-      cout << "Item " << i << " with weight " << weights[i - 1] << " and value " << profits[i - 1] << " is selected" << endl;
+      std::cout << "Item " << i << " with weight " << weights[i - 1] << " and value " << profits[i - 1] << " is selected" << std::endl;
       total_profit -= profits[i - 1];
       w -= weights[i - 1];
     }

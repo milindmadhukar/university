@@ -17,6 +17,9 @@ int matrixChainMultiplication(int *matrices, int i, int j) {
     dp[i][j] = std::min(dp[i][j], matrixChainMultiplication(matrices, i, k) +
                                       matrixChainMultiplication(matrices, k + 1, j) +
                                       matrices[i - 1] * matrices[k] * matrices[j]);
+    dp[i][j] = matrixChainMultiplication(matrices, i, k) +
+                                      matrixChainMultiplication(matrices, k + 1, j) +
+                                      matrices[i - 1] * matrices[k] * matrices[j];
   }
   return dp[i][j];
 }

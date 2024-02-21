@@ -31,7 +31,7 @@ int main() {
     total_sum += w[i];
   }
 
-  SumOfSub(0, 0, 73, x, w, M);
+  SumOfSub(0, 0, total_sum, x, w, M);
 
   std::cout << std::endl;
 }
