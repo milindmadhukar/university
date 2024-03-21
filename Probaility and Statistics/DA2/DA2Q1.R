@@ -17,4 +17,4 @@ print(cor(fathers_height, sons_height))
 
 linear_model <- lm(fathers_height ~ sons_height)
 
-print(summary(linear_model))
+summary(linear_model)
