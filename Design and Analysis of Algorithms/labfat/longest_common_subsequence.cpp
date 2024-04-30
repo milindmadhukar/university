@@ -5,7 +5,6 @@
 int dp[100][100];
 
 int lcs(const std::string &X, const std::string &Y, const int m, const int n) {
-
   for (int i = 0; i <= m; i++) {
     for (int j = 0; j <= n; j++) {
       if (i == 0 || j == 0) {

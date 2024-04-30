@@ -6,12 +6,12 @@
 
 struct MinHeapNode {
   char data;
-  unsigned int freq;
+  int freq;
   MinHeapNode *left, *right;
-  MinHeapNode(char data, unsigned int freq) {
-    left = right = NULL;
+  MinHeapNode(char data, int freq) {
     this->data = data;
     this->freq = freq;
+    left = right = NULL;
   }
 };
 
@@ -24,10 +24,10 @@ struct compare {
 std::priority_queue<MinHeapNode *, std::vector<MinHeapNode *>, compare> minHeap;
 std::unordered_map<char, std::string> codes;
 
-MinHeapNode *HuffmanCodes(char arr[], int freq[], int size) {
-  struct MinHeapNode *top, *left, *right;
+MinHeapNode *HuffmanCodes(char arr[], int freq[], int n) {
+  MinHeapNode *left, *right, *top;
 
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < n; i++) {
     minHeap.push(new MinHeapNode(arr[i], freq[i]));
   }
 
@@ -41,6 +41,7 @@ MinHeapNode *HuffmanCodes(char arr[], int freq[], int size) {
     top = new MinHeapNode('$', left->freq + right->freq);
     top->left = left;
     top->right = right;
+
     minHeap.push(top);
   }
 
@@ -48,8 +49,9 @@ MinHeapNode *HuffmanCodes(char arr[], int freq[], int size) {
 }
 
 void saveCodes(MinHeapNode *node, std::string code) {
-  if (node == NULL)
+  if (node == NULL) {
     return;
+  }
 
   if (node->data != '$') {
     codes[node->data] = code;
@@ -59,23 +61,40 @@ void saveCodes(MinHeapNode *node, std::string code) {
   saveCodes(node->right, code + "1");
 }
 
-std::string decodeHuffMan(MinHeapNode *root, std::string message) {
-  MinHeapNode *curr = root;
-
-  std::string answer = "";
+std::string decodeHuffman(MinHeapNode *root, std::string message) {
+  std::string ans = "";
+  MinHeapNode *current = root;
 
   for (int i = 0; i < message.length(); i++) {
     if (message[i] == '0') {
-      curr = curr->left;
+      current = current->left;
     } else if (message[i] == '1') {
-      curr = curr->right;
+      current = current->right;
     }
-
-    if (curr->left == NULL && curr->right == NULL) {
-      answer += curr->data;
-      curr = root;
+    if (current->left == NULL && current->right == NULL) {
+      ans += current->data;
+      current = root;
     }
   }
 
-  return answer;
+  return ans;
 }
+
+int main() {
+  int n = 6;
+  char arr[] = {'c', 'd', 'g', 'u', 'm', 'a'};
+  int freq[] = {34, 9, 35, 2, 2, 100};
+  MinHeapNode *root = HuffmanCodes(arr, freq, n);
+  saveCodes(root, "");
+
+  for (auto i = codes.begin(); i != codes.end(); i++) {
+    std::cout << "Char: " << i->first << " -> Code: " << i->second << std::endl;
+  }
+
+  const std::string message = "0101101101001";
+
+  std::string decoded = decodeHuffman(root, message);
+
+  std::cout << "Decoded message is: " << decoded << std::endl;
+}
+
