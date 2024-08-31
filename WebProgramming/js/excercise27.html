@@ -1,0 +1,82 @@
+<!-- Ensure mandatory fields like Emp Name, Email, Department, and Designation are filled before submission. Display error messages for missing fields. -->
+<!-- Check the username and compare password and confirm password fields and display the message.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+
+  <script>
+    function validateForm() {
+      var empName = document.getElementById("empName").value;
+      var email = document.getElementById("email").value;
+      var department = document.getElementById("department").value;
+      var designation = document.getElementById("designation").value;
+
+      if (empName == "") {
+        alert("Emp Name must be filled out");
+        return;
+      }
+      if (email == "") {
+        alert("Email must be filled out");
+        return;
+      }
+      if (department == "") {
+        alert("Department must be filled out");
+        return;
+      }
+      if (designation == "") {
+        alert("Designation must be filled out");
+      }
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (username == "") {
+        alert("Username must be filled out");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Password and Confirm Password must be the same");
+        return;
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <form onsubmit="validateForm()">
+    <label for="empName">Emp Name:</label>
+    <input type="text" id="empName" name="empName">
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <br>
+    <label for="department">Department:</label>
+    <input type="text" id="department" name="department">
+    <br>
+    <label for="designation">Designation:</label>
+    <input type="text" id="designation" name="designation">
+    <br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword">
+    <br>
+
+    <input type="submit" value="Submit">
+</body>
+
+</html>

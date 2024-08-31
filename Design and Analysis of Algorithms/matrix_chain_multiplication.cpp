@@ -14,25 +14,22 @@ int matrixChainMultiplication(int *matrices, int i, int j) {
   }
   dp[i][j] = INT_MAX;
   for (int k = i; k < j; k++) {
-    dp[i][j] = std::min(dp[i][j], matrixChainMultiplication(matrices, i, k) +
-                                      matrixChainMultiplication(matrices, k + 1, j) +
-                                      matrices[i - 1] * matrices[k] * matrices[j]);
-    dp[i][j] = matrixChainMultiplication(matrices, i, k) +
-                                      matrixChainMultiplication(matrices, k + 1, j) +
-                                      matrices[i - 1] * matrices[k] * matrices[j];
+    dp[i][j] =
+        std::min(dp[i][j], matrixChainMultiplication(matrices, i, k) +
+                               matrixChainMultiplication(matrices, k + 1, j) +
+                               matrices[i - 1] * matrices[k] * matrices[j]);
   }
   return dp[i][j];
 }
 
-
 int main() {
   std::memset(dp, -1, sizeof dp);
-  int matrices[] = {13, 5, 89, 3, 34};
+  int matrices[] = {2, 5, 10, 5, 6, 10};
   int i = 1, j = sizeof(matrices) / sizeof(matrices[0]) - 1;
   int result = matrixChainMultiplication(matrices, i, j);
 
-  for(int i = 0; i < 4; i++) {
-    for(int j = 0; j < 4; j++) {
+  for (int i = 0; i < 5; i++) {
+    for (int j = 0; j < 5; j++) {
       std::cout << dp[i][j] << "\t\t\t";
     }
     std::cout << "\n";

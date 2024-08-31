@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <img src="" width="50%" id="myimg"/>
+
+    <script>
+      let count = 0
+      const images = [
+        'https://media.gq-magazine.co.uk/photos/5ebd301ea7a089b1a9138c63/16:9/w_1920,c_limit/20200514-Martin-Garrix-01.jpg',
+        'https://miro.medium.com/v2/resize:fit:640/format:webp/1*tNHxQPKlXj5qMBz1KdCAHw.png',
+        'https://cdn.platinumlist.net/upload/artist/martin_garrix_45-orig1670592037.jpg',
+      ]
+      const img = document.getElementById("myimg")
+      img.src = images[count]
+
+
+      img.addEventListener('click', () => {
+        console.log("Clicked")
+        count += (count + 1) % images.length
+        img.src = images[count]
+      })
+    </script>
+  </body>
+</html>

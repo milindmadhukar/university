@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  padding: 1em;
+  background-color: #333;
+  color: white;
+}
+
+h2 {
+  margin: 1em;
+}
+
+#pastEvents {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.pastEvent {
+  flex-grow: 1;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.pastEvent img {
+  max-width: 20vw;
+  border-radius: 5px;
+}
+
+#pastEventsDropdown {
+  margin: 1em;
+  padding: 0.5em;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+#eventTypes {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.event {
+  display: flex;
+}
+
+.eventType {
+  flex-grow: 1;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+
+  align-items: center;
+}
+
+.eventType img {
+  max-width: 20vw;
+  border-radius: 5px;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+}
+
+
+#eventDetails img {
+  max-width: 20vw;
+  border-radius: 5px;
+}
+
+#filterOptions {
+  margin: 1em;
+}
+
+#filterOptions h3 {
+  margin: 1em 0;
+}
+
+#eventDetails {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#contactForm {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+#contactForm label {
+  display: block;
+  margin: 1em 0;
+}
+
+#contactForm input,
+#contactForm select {
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+#contactForm input[type="submit"] {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+#cart {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+#cart p {
+  margin: 0.5em 0;
+}

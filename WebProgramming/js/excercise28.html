@@ -1,0 +1,69 @@
+<!-- Validate numeric fields like Phone Number, Salary, and Experience (in years) to ensure they contain only numbers and are within reasonable ranges.  -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="css/style.css" rel="stylesheet" />
+
+  <script>
+    function validateForm() {
+      var phone = document.getElementById('phone').value
+      var salary = document.getElementById('salary').value
+      var experience = document.getElementById('experience').value
+
+      // Validate phone number
+      if (isNaN(phone)) {
+        alert('Phone number must be a number')
+        return false
+      }
+
+      // Validate salary
+      if (isNaN(salary)) {
+        alert('Salary must be a number')
+        return false
+      }
+
+      // Validate experience
+      if (isNaN(experience)) {
+        alert('Experience must be a number')
+        return false
+      }
+
+      // Validate ranges
+      if (phone.length !== 10) {
+        alert('Phone number must be 10 digits long')
+        return false
+      }
+
+      if (salary < 0 || salary > 10_00_000) {
+        alert('Salary must be between 0 and 10,00,000')
+        return false
+      }
+
+      if (experience < 0 || experience > 50) {
+        alert('Experience must be between 0 and 50')
+        return false
+      }
+
+      return true
+    }
+  </script>
+</head>
+
+<body>
+  <form onsubmit="return validateForm()">
+    <input type="text" id="phone" placeholder="Phone Number" />
+    <br />
+    <input type="text" id="salary" placeholder="Salary" />
+    <br />
+    <input type="text" id="experience" placeholder="Experience (in years)" />
+    <br />
+    <input type="submit" value="Submit" />
+  </form>
+</body>
+
+</html>

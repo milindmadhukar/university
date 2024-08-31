@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Event Planning Service</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>Event Planning Service</h1>
+    <h2>Event Types</h2>
+    <div id="eventTypes"></div>
+
+    <h2>Dropdown Menu</h2>
+    <select id="pastEventsDropdown">
+      <option value="Wedding">Wedding</option>
+      <option value="Conference">Conference</option>
+      <option value="Party">Party</option>
+    </select>
+
+    <div id="pastEvents">
+      Past Events
+    </div>
+
+
+    <h2>Filter Options</h2>
+    <div id="filterOptions">
+      <h3>Services</h3>
+      <input type="checkbox" id="catering" name="catering" />
+      <label for="catering">Catering</label>
+      <input type="checkbox" id="photography" name="photography" />
+      <label for="photography">Photography</label>
+      <input type="checkbox" id="entertainment" name="entertainment" />
+      <label for="entertainment">Entertainment</label>
+
+      <h3>Budget Range</h3>
+      <input type="radio" id="under5000" name="budget" value="under5000" />
+      <label for="under5000">Under $5000</label>
+      <input type="radio" id="5000to10000" name="budget" value="5000to10000" />
+      <label for="5000to10000">$5000-$10000</label>
+      <input type="radio" id="above10000" name="budget" value="above10000" />
+      <label for="above10000">Above $10000</label>
+    </div>
+
+    <h2>Event Details</h2>
+    <div id="eventDetails">
+      <img src="wedding.jpg" alt="Wedding" />
+      <h3>Wedding</h3>
+      <p>Beautiful weddings for your special day.</p>
+      <p>$5000</p>
+    </div>
+
+    <h2>Contact Form</h2>
+    <form id="contactForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+      <label for="eventType">Event Type:</label>
+      <select id="eventType" name="eventType">
+        <option value="wedding">Wedding</option>
+        <option value="conference">Conference</option>
+        <option value="party">Party</option>
+      </select>
+      <input type="submit" value="Submit" />
+
+      <div id="cart"></div>
+    </form>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>

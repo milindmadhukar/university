@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Primitive Shapes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Create all basic primitive shapes using HTML Canvas with filled color using HTML canvas as required.  -->
+  <canvas id="myCanvas" width="800" height="200"></canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Rectangle
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(10, 10, 100, 100);
+
+    // Line
+    ctx.beginPath();
+    ctx.moveTo(120, 10);
+    ctx.lineTo(220, 110);
+    ctx.strokeStyle = 'green';
+    ctx.stroke();
+
+    // Circle
+    ctx.beginPath();
+    ctx.arc(350, 60, 40, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'purple';
+    ctx.stroke();
+
+    // Text
+    ctx.font = '30px Arial';
+    ctx.fillStyle = 'orange';
+    ctx.fillText('Hello World', 10, 150);
+
+    // Gradient Rectangle
+    const gradientRect = ctx.createLinearGradient(400, 10, 550, 10);
+    gradientRect.addColorStop(0, 'yellow');
+    gradientRect.addColorStop(1, 'red');
+    ctx.fillStyle = gradientRect;
+    ctx.fillRect(400, 10, 150, 80);
+
+    // Gradient Circle
+    const gradientCircle = ctx.createRadialGradient(700, 50, 5, 750, 50, 100);
+    gradientCircle.addColorStop(0, 'cyan');
+    gradientCircle.addColorStop(1, 'magenta');
+    ctx.fillStyle = gradientCircle;
+    ctx.beginPath();
+    ctx.arc(750, 50, 40, 0, 2 * Math.PI);
+    ctx.fill();
+  </script>
+</body>
+
+</html>

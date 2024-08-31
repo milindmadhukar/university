@@ -4,6 +4,8 @@
 #include <stack>
 #include <vector>
 
+#define pi 3.14159265358979323846
+
 struct Point {
   int x, y;
 };
@@ -24,7 +26,10 @@ float angleBetweenPoints(Point p1, Point p2) {
     slope = (p2.y - p1.y) * 1.0f / (p2.x - p1.x);
   }
 
-  return std::atan(slope);
+  int angle = std::atan(slope) * 180 / pi;
+  if (angle < 0)
+    angle += 180;
+  return angle;
 }
 
 int ccw(Point a, Point b, Point c) {
@@ -51,6 +56,8 @@ Point pointNextToTop(std::stack<Point> &currentStack) {
 void GrahamScan(Point *points, int n) {
   int ymin = points[0].y, minIdx = 0;
 
+  int start = 0;
+
   for (int i = 1; i < n; i++) {
     int y = points[i].y;
 
@@ -62,10 +69,9 @@ void GrahamScan(Point *points, int n) {
   hullPoints.push(minPoint);
 
   swap(points[0], minPoint); // Put at start
-  points++;                  // Removes the minimum
-  n--;
+  start++;
 
-  for (int i = 0; i < n; i++) {
+  for (int i = start; i < n; i++) {
     for (int j = 0; j < n - i - 1; j++) {
       float a1 = angleBetweenPoints(minPoint, points[j]);
       float a2 = angleBetweenPoints(minPoint, points[j + 1]);

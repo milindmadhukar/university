@@ -7,7 +7,7 @@ struct Node {
 };
 
 struct Node *create_node(int data) {
-  struct Node *node = malloc(sizeof(struct Node));
+  struct Node *node = (struct Node*)malloc(sizeof(struct Node));
   node->data = data;
   return node;
 }
@@ -31,7 +31,8 @@ void breadth_first_search(struct Node *start) {
     struct Node *current_node = visited_queue[++front];
     printf("%d ", current_node->data);
 
-    // Enqueue all adjacent nodes of the dequeued node that have not been visited
+    // Enqueue all adjacent nodes of the dequeued node that have not been
+    // visited
     for (int i = 0; i < 100; i++) {
       if (current_node->adjacent[i] != NULL) {
         struct Node *adjacent_node = current_node->adjacent[i];
@@ -45,56 +46,38 @@ void breadth_first_search(struct Node *start) {
 }
 
 int main() {
-  struct Node *a = create_node(0);
-  struct Node *b = create_node(1);
-  struct Node *c = create_node(2);
-  struct Node *d = create_node(3);
-  struct Node *e = create_node(4);
-  struct Node *f = create_node(5);
-  struct Node *g = create_node(6);
-  struct Node *h = create_node(7);
-  struct Node *i = create_node(8);
 
-  // a has adjacent as b,c
-  // b has adjacent as a,d,e
-  // c has adjacent as a,e,f
-  // d has adjacent as b,g
-  // e has adjacent as b,c,g,h
-  // f has adjacent as c,h
-  // g has adjacent as d,e,i
-  // h has adjacent as e,f,i
-  // i has adjacent as h,g
+  struct Node *s = create_node(0); // s-a-c-b-d-t
+  struct Node *a = create_node(1);
+  struct Node *b = create_node(2);
+  struct Node *c = create_node(3);
+  struct Node *d = create_node(4);
+  struct Node *t = create_node(5);
+
+  // s has adjacent as a,c
+  // a has adjacent as b, c, d
+  // b has adjacent as t
+  // c has adjacent as d
+  // d has adjacent as b, t
 
   // Add adjacent nodes for each node
+  s->adjacent[0] = a;
+  s->adjacent[1] = c;
+
   a->adjacent[0] = b;
   a->adjacent[1] = c;
-  b->adjacent[0] = a;
-  b->adjacent[1] = d;
-  b->adjacent[2] = e;
-  c->adjacent[0] = a;
-  c->adjacent[1] = e;
-  c->adjacent[2] = f;
+  a->adjacent[2] = d;
+
+  b->adjacent[0] = t;
+
+  c->adjacent[0] = d;
+
   d->adjacent[0] = b;
-  d->adjacent[1] = g;
-  e->adjacent[0] = b;
-  e->adjacent[1] = c;
-  e->adjacent[2] = g;
-  e->adjacent[3] = h;
-  f->adjacent[0] = c;
-  f->adjacent[1] = h;
-  g->adjacent[0] = d;
-  g->adjacent[1] = e;
-  g->adjacent[2] = i;
-  h->adjacent[0] = e;
-  h->adjacent[1] = f;
-  h->adjacent[2] = i;
-  i->adjacent[0] = g;
-  i->adjacent[1] = h;
+  d->adjacent[1] = t;
 
   // Perform BFS starting from node a
   printf("BFS traversal: ");
-  breadth_first_search(a);
+  breadth_first_search(s);
 
   return 0;
 }
-

@@ -21,18 +21,30 @@ void swap(int *a, int *b) {
   *b = t;
 }
 
-int partition(int arr[], int beg, int end) {
-  int pivot = arr[end];
-  int i = (beg - 1);
+int partition(int arr[], int l, int h) {
 
-  for (int j = beg; j <= end; j++) {
-    if (arr[j] < pivot) {
-      i++;
-      swap(&arr[i], &arr[j]);
+  // Random pivot without rand()
+  int random = l + rand() % (h - l);
+  int pivot = arr[random];
+
+
+
+  swap(&arr[l], &arr[random]);
+
+  int i = l;
+  int j = h;
+
+  int k = h;
+  for (int i = h; i > l; i--) {
+    if (arr[i] > pivot) {
+      swap(&arr[i], &arr[k]);
+      k--;
     }
   }
-  swap(&arr[i + 1], &arr[end]);
-  return (i + 1);
+
+  swap(&arr[l], &arr[j]);
+
+  return j;
 }
 
 void quickSort(int arr[], int beg, int end) {

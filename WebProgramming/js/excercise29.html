@@ -1,0 +1,61 @@
+<!-- Validate at least one checkbox and radio option is selected within a employee group before form submission. Display an error message if no selection is made using HTML and CSS.  -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <form onsubmit="checksubmitted()">
+    <input type="checkbox" name="employee-checkbox" value="1" /> Employee 1
+    <input type="checkbox" name="employee-checkbox" value="2" /> Employee 2
+    <input type="checkbox" name="employee-checkbox" value="3" /> Employee 3
+    <input type="checkbox" name="employee-checkbox" value="4" /> Employee 4
+    <input type="checkbox" name="employee-checkbox" value="5" /> Employee 5
+
+    <br />
+    <p>Age group?</p>
+    <input type="radio" name="employee-radio" value="20-30" /> 20-30
+    <input type="radio" name="employee-radio" value="30-40" /> 30-40
+    <input type="radio" name="employee-radio" value="40-50" /> 40-50
+
+    <br />
+    <button type="submit">Submit</button>
+
+  </form>
+
+  <script>
+    const checksubmitted = () => {
+      const checkboxes = document.getElementsByName('employee-checkbox')
+      const radios = document.getElementsByName('employee-radio')
+      let checked = false
+      let selected = false
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          checked = true
+          break
+        }
+      }
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          selected = true
+          break
+        }
+      }
+      if (!checked) {
+        alert('Please select at least one employee')
+        return false
+      }
+      if (!selected) {
+        alert('Please select an age group')
+        return false
+      }
+    }
+  </script>
+</body>
+
+</html>

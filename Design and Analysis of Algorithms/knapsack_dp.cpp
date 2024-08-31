@@ -10,7 +10,8 @@ int knapSack(int W, int weights[], int profits[], int n) {
       if (weights[i - 1] > w) {
         dp[i][w] = dp[i - 1][w];
       } else {
-        dp[i][w] = std::max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
+        dp[i][w] = std::max(profits[i - 1] + dp[i - 1][w - weights[i - 1]],
+                            dp[i - 1][w]);
       }
     }
   }
@@ -18,13 +19,16 @@ int knapSack(int W, int weights[], int profits[], int n) {
   return dp[n][W];
 }
 
-void printSelectedItems(int n, int W, int total_profit, int weights[], int profits[]) {
+void printSelectedItems(int n, int W, int total_profit, int weights[],
+                        int profits[]) {
   int w = W;
   for (int i = n; i > 0 && total_profit > 0; i--) {
     if (total_profit == dp[i - 1][w]) {
       continue;
     } else {
-      std::cout << "Item " << i << " with weight " << weights[i - 1] << " and value " << profits[i - 1] << " is selected" << std::endl;
+      std::cout << "Item " << i << " with weight " << weights[i - 1]
+                << " and value " << profits[i - 1] << " is selected"
+                << std::endl;
       total_profit -= profits[i - 1];
       w -= weights[i - 1];
     }

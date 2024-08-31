@@ -1,0 +1,61 @@
+body {
+  background-color: #fcf8f0 !important;
+}
+
+.bebas {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.urbanist {
+  font-family: 'Urbanist', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* hover over image for subtle animation, img class is .hero-img */
+
+.hero-img {
+  transition: transform 0.5s ease;
+}
+
+.hero-img:hover {
+  transform: scale(1.07);
+}
+
+.carousel-item {
+  background-color: white !important;
+}
+
+.card {
+  margin: 20px !important;
+  border-radius: 1.25rem !important;
+  height: 100% !important;
+}
+
+.card-cover :hover {
+  transition: transform 0.3s ease;
+  /* transform: scale(1.05); */
+}
+
+.card > img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.card-title {
+  text-align: center !important;
+}
+
+.radio__group {
+  display: flex;
+  /* border: 2px solid; */
+  /* border-radius: 10px; */
+  justify-content: space-around;
+}
+
+.dropdown {
+  padding-bottom: 10px !important;
+}

@@ -1,0 +1,70 @@
+<!-- Design a product card using a div as the main container and separate divs for image, title, price, and description. -->
+<!-- Use span tags to highlight specific information like discounts or limited stock. -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+      .product-card {
+        width: 300px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+      }
+
+      .product-image {
+        text-align: center;
+      }
+
+      .product-image img {
+        width: 100%;
+      }
+
+      .product-title {
+        text-align: center;
+      }
+
+      .product-price {
+        text-align: center;
+      }
+
+      .discounted-price {
+        color: red;
+        text-decoration: line-through;
+      }
+
+      .original-price {
+        color: green;
+      }
+
+      .product-description {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="product-card">
+      <div class="product-image">
+        <img
+          src="https://shop.martingarrix.com/cdn/shop/files/xBlackSilverTeeBack_600x600.png?v=1699434196"
+          alt="Product Image"
+        />
+      </div>
+      <div class="product-title">
+        <h2>+X BLACK SILVER T-SHIRT</h2>
+      </div>
+      <div class="product-price">
+        <span class="discounted-price">$100</span>
+        <span class="original-price">$150</span>
+      </div>
+      <div class="product-description">
+        <p>The new +x Black Silver T-Shirt represents a minimalistic and mysterious design from one of the Martin Garrix show visuals. This design is also available on Hoodie products.</p>
+      </div>
+    </div>
+  </body>
+</html>

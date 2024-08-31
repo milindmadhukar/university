@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <canvas id="draw" height="5000px" width="3000px"> </canvas>
+    <script>
+      const canvas = document.getElementById('draw')
+      const ctx = canvas.getContext('2d')
+
+      ctx.beginPath()
+      ctx.moveTo(200, 200)
+      ctx.lineTo(400, 200)
+      ctx.lineTo(400, 520)
+      ctx.lineTo(200, 520)
+      ctx.lineTo(200, 200)
+      ctx.lineTo(120, 400)
+      ctx.lineTo(140, 410)
+      ctx.lineTo(200, 270)
+      ctx.fillStyle = 'red'
+      ctx.fill()
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.moveTo(200, 200)
+      ctx.lineTo(400, 200)
+      ctx.lineTo(480, 400)
+      ctx.lineTo(460, 410)
+      ctx.lineTo(400, 270)
+      ctx.fillStyle = 'aquablue'
+      ctx.fill()
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.moveTo(230, 520)
+      ctx.lineTo(230, 720)
+      ctx.lineTo(270, 720)
+      ctx.lineTo(270, 520)
+      ctx.fillStyle = 'brown'
+      ctx.fill()
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.moveTo(330, 520)
+      ctx.lineTo(330, 720)
+      ctx.lineTo(370, 720)
+      ctx.lineTo(370, 520)
+      ctx.fillStyle = 'brown'
+      ctx.fill()
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.arc(300, 150, 50, 0, 2 * Math.PI)
+      ctx.fillStyle = 'brown'
+      ctx.fill()
+      ctx.stroke()
+    </script>
+  </body>
+</html>

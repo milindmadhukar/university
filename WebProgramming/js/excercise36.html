@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Registration Details</legend>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"/>
+        <br />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/>
+        <br />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"/>
+        <br />
+        <input type="submit" value="Submit" />
+      </fieldset>
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const email = document.getElementById('email');
+        const fieldset = document.querySelector('fieldset');
+        const error = document.createElement('p');
+        error.style.color = "red";
+        if (username.value === '') {
+          error.textContent = 'Username is required';
+          fieldset.appendChild(error);
+        }
+        if (password.value === '') {
+          error.textContent = 'Password is required';
+          fieldset.appendChild(error);
+        }
+        if (email.value === '') {
+          error.textContent = 'Email is required';
+          fieldset.appendChild(error);
+        }
+      });
+    </script>
+  </body>
+</html>

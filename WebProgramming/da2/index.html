@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        display: flex;
+        width: 80%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 auto;
+        padding: 15px;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        align-self: flex-start;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+          'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 1.2rem;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='number'],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #000000;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+
+      input[type='file'] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+        opacity: 0.7;
+      }
+
+      field {
+        margin-bottom: 15px;
+      }
+
+      .test-options {
+        display: flex;
+        align-items: center;
+      }
+
+      input[type='submit'] {
+        width: 200px;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Lab Assesment 2</h1>
+    <h3 style="text-align: center">Student Registration Form</h3>
+
+    <div class="form-container">
+      <form id="form" action="index.js" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <br />
+
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+          <option value="UK">UK</option>
+          <option value="Australia">Australia</option>
+        </select>
+        <br />
+
+        <label for="program">Program:</label>
+        <select id="program" name="program">
+          <option value="Computer Science Core">Computer Science Core</option>
+          <option value="Computer Science With Specialization">
+            Computer Science With Specialization
+          </option>
+          <option value="Electrical">Electrical</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+        </select>
+        <br />
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" />
+        <br />
+
+        <label for="transcripts">Academic Transcripts:</label>
+        <input type="file" id="transcripts" name="transcripts" accept=".pdf" />
+        <br />
+
+        <div style="align-self: flex-start">
+          <label for="test">English Proficiency Test:</label>
+          <br />
+          <label for="toefl">TOEFL</label>
+          <input type="radio" id="toefl" name="english" value="TOEFL" />
+
+          <label for="toefl">IELTS</label>
+          <input type="radio" id="ielts" name="english" value="ielts" />
+          <br />
+          <br />
+          <label style="display: hidden;" id="score-label" for="score">Score:</label>
+          <input style="display: hidden;" stype="text" id="score" name="score" />
+        </div>
+
+        <br />
+
+        <div>
+          <input type="checkbox" id="terms" name="terms" />
+          <label for="terms">I agree to the terms and conditions</label>
+        </div>
+        <br />
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById('form')
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        const name = document.getElementById('name').value
+        const email = document.getElementById('email').value
+        const country = document.getElementById('country').value
+        const program = document.getElementById('program').value
+        const phone = document.getElementById('phone').value
+        const transcripts = document.getElementById('transcripts').value
+        const toefl = document.getElementById('toefl')
+        const ielts = document.getElementById('ielts')
+        const score = document.getElementById('score')
+        const scoreLabel = document.getElementById('score-label')
+
+        toefl.addEventListener('click', function () {
+          scoreLabel.style.display = 'block'
+          score.style.display = 'block'
+        })
+
+        const terms = document.getElementById('terms').checked
+
+        if (name === '') {
+          alert('Name is required')
+          return
+        }
+        if (!name.match(/^[a-zA-Z0-9\s]+$/)) {
+          alert('Invalid name. Please use alphanumeric characters only.')
+          return
+        }
+
+        if (email === '') {
+          alert('Email is required')
+          return
+        }
+
+        if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          alert('Invalid email address.')
+          return
+        }
+
+        if (country === '') {
+          alert('Country is required')
+          return
+        }
+
+        if (program === '') {
+          alert('Program is required')
+          return
+        }
+
+        if (phone === '') {
+          alert('Phone is required')
+          return
+        }
+
+        if (!phone.match(/^[0-9]+$/)) {
+          alert('Invalid phone number. Please use numeric characters only.')
+          return
+        }
+
+        if (transcripts === '') {
+          alert('Transcripts is required')
+          return
+        }
+
+        if (transcripts.type !== 'application/pdf') {
+          alert('Transcripts must be in PDF format.')
+          return
+        }
+
+        if (transcripts.size > 50000) {
+          alert('Transcripts must be less than 50kb')
+          return
+        }
+
+        if (toefl.checked === false && ielts.checked === false) {
+          alert('English Proficiency Test is required')
+          return
+        } else if (toefl.checked === true && score === '') {
+          alert('Score is required')
+          return
+        } else if (ielts.checked === true && score === '') {
+          alert('Score is required')
+          return
+        }
+
+        if (terms === false) {
+          alert('Terms and Conditions is required')
+          return
+        }
+
+        alert('Form submitted successfully')
+      })
+    </script>
+  </body>
+</html>

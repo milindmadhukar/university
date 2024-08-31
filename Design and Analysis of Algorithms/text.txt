@@ -1,0 +1,133 @@
+Algorithm GreedyKnapsack(int n, C, int weights, int profits)
+{
+  sort on profit per weight
+  remC = C
+  for i = 0 to n {
+    if(W(i) > remC)
+      break
+
+    x[i] = 1
+    remC - W(i)
+  }
+
+  if i <= n {
+    X[i] = remC / W(i)
+  }
+}
+
+Algorithm Huffman(C)
+{
+  Q <- C
+  N = |C|
+  for i = 1 to N-1
+  {
+    Z = allocate_node()
+    X = left[z] = extract_min()
+    Y = right[z] = extract_min()
+    F[Z] = F[X] + F[Y]
+    Insert(Q, Z)
+  }
+
+  return extract_min()
+}
+
+Algorithm MaxSubarraySum(A, low, high) {
+  if low == high 
+    return low, high, A[low]
+
+  mid = (low + high) / 2
+
+  left_low, left_high, left_sum = MaxSubarraySum(A, low, mid)
+  right_low, right_high, right_sum = MaxSubarraySum(A, mid + 1, high)
+  cross_low, cross_high, cross_sum = FindCross(A, low, mid, high)
+
+  // max
+}
+Algorithm FindCross(A, low, mid, high) {
+  int left_sum = -inf
+  int sum = 0
+  for i = mid down to low
+    sum += a[i]
+    if sum > left_sum
+      left_sum = sum
+      left_most = i
+}
+
+Algorithm Karatsuba(num1, num2) {
+  if num1 <= 10 | num2 <= 10 {
+    return num1*num2
+  }
+
+  N = max dig1, dig2
+  N2 = N/2
+
+  a = num1 % 10^n2
+  b = num1 / 10^n2
+
+  c = num2 % 10^n2
+  d = num2 / 10^n2
+
+  X = Karatsuba(a, c)
+  Y = Karatsuba(b, d)
+  Z = Karatsuba(a+b, c+d) - X - Y
+
+  return X*10^2n2 + Z*10^n2 + Y
+}
+
+// Initialize all dp[N][N] to -1
+Algorithm MatrixChainMultiplication(matrices, i, j)
+{
+  if i == j 
+    return 0
+  if dp[i][j] != -1
+    return dp[i][j]
+
+  dp[i][j] = INT_MAX (Inf)
+  for k = i to j - 1 {
+    dp[i][j] = min(
+                dp[i][j], 
+                MatrixChainMultiplication(matrices, i, k) + MatrixChainMultiplication(matrices, k + 1, j) * matrices[i - 1] * matrices[k] * matrices[j]
+              )
+  }
+
+  return dp[i][j]
+}
+
+Algorithm LCS(X, Y, m, n) {
+  for i = 1 to n
+    for j = 1 to n
+      if (i == 1 or j == 1)
+        C[i][j] = 0
+      else if (X[i] == Y[j]) 
+        C[i][j] = 1 + C[i - 1][j - 1]
+      else
+        C[i][j] = max(C[i-1][j], C[i][j -1])
+
+  return C[m][n]
+}
+
+Algorithm LCS_Print(X, m, n, C)
+{
+  if C[m][n] == C[m-1][n]
+    LCS_Print(X, m - 1, n, C)
+
+  else if C[m][n] == C[m][n - 1]
+    LCS_Print(X, m, n-1, C)
+  
+  else
+    LCS_Print(X, m-1, n-1, C)
+    print(X[m])
+}
+
+
+// Initialize dp to 0
+Algorithm KnapsackDP(W, weight, profits, N) {
+  for i = 1 to N
+    for w = 1 to W
+      if weight[i] > W
+        dp[i][w] = dp[i-1][w]
+      else
+        dp[i][w] = max(dp[i - 1][w] + dp[i - 1][w - wi] + pi)
+  
+  return M[n, W]
+}

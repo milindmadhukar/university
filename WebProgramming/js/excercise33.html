@@ -1,0 +1,31 @@
+<!-- Display a message below the text box if the user types more than 20 characters in red color. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <input type="text" id="input" />
+    <p id="message" style="display: none; color: red;">Length exceeds 20 characters</p>
+
+    <script>
+
+      const inp = document.getElementById('input')
+      const message = document.getElementById('message')
+
+      inp.addEventListener('input', () => {
+        if (inp.value.length > 20) {
+          message.style.display = 'block'
+        } else {
+          message.style.display = 'none'
+        }
+      })
+    
+    </script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <cstring>
+
 using namespace std;
 
 unordered_map<char, string> codes;
@@ -101,8 +102,7 @@ string decodeHuffman(struct MinHeapNode *root, string s) {
 
 int main() {
 
-  char arr[] = {'c', 'd', 'g', 'u', 'm', 'a'};
-  int freq[] = {34, 9, 35, 2, 2, 100};
+  char arr[] = {'c', 'd', 'g', 'u', 'm', 'a'}; int freq[] = {34, 9, 35, 2, 2, 100};
 
   int size = sizeof(arr) / sizeof(arr[0]);
 

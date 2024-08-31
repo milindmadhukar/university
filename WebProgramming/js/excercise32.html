@@ -1,0 +1,29 @@
+<!-- Change the text color to green if the user presses the "down" key and change color to red when user press "up" keyboard key. -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <p id="text">
+      Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum
+      sint consectetur cupidatat.
+    </p>
+
+    <script>
+      const text = document.getElementById('text')
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown') {
+          text.style.color = 'green'
+        } else if (event.key === 'ArrowUp') {
+          text.style.color = 'red'
+        }
+      })
+    </script>
+  </body>
+</html>

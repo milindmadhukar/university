@@ -1,0 +1,28 @@
+<!-- Change the square's color when the user hovers over it... -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div
+      id="square"
+      style="width: 300px; height: 300px; background: greenyellow"
+    ></div>
+    <script>
+      const square = document.getElementById('square')
+      square.addEventListener('mouseover', () => {
+        square.style.background = 'red'
+      })
+      square.addEventListener('mouseout', () => {
+        square.style.background = 'greenyellow'
+      })
+    </script>
+
+  </body>
+</html>
