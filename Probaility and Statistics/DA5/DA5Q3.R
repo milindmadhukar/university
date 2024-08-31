@@ -1,0 +1,9 @@
+xbar=71.8
+mu=70
+sigma=8.9
+n=100
+z=(xbar-mu)/(sigma/sqrt(n))
+z
+alpha=0.05
+z.alpha=qnorm(1-alpha)
+z.alpha
