@@ -16,7 +16,7 @@ int valid = 1;
 
 %%
 
-input: /* empty */
+input: 
      | input line
      ;
 
@@ -28,14 +28,14 @@ line: '\n'         { /* ignore empty lines */ }
         } else {
             printf("Entered arithmetic expression is Invalid\n");
         }
-        valid = 1;  // Reset for next expression
-        printf("\n");  // Add a blank line for better readability
+        valid = 1; 
+        printf("\n"); 
     }
     | error '\n'   { 
         yyerrok; 
         valid = 0;
         printf("Entered arithmetic expression is Invalid\n");
-        printf("\n");  // Add a blank line for better readability
+        printf("\n");
     }
     ;
 

@@ -7,7 +7,7 @@
 
 %%
 [0-9]+      { yylval = atoi(yytext); return NUMBER; }
-[-+*/%()]   { return yytext[0]; }  /* Note the added '%' here */
+[-+*/%()]   { return yytext[0]; }
 [ \t]       { /* ignore whitespace */ }
 \n          { return '\n'; }
 .           { /* ignore everything else */ }

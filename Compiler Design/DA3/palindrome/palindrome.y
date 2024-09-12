@@ -27,20 +27,20 @@ input: string '\n' {
     } else {
         printf("Not a palindrome\n");
     }
-    input_length = 0;  // Reset for next input
+    input_length = 0;
     memset(input_string, 0, MAX_LENGTH);
     fflush(stdout);
 }
 ;
 
-string: /* empty */
+string:
       | string CHAR
       ;
 
 %%
 
 int is_palindrome() {
-    if (input_length == 0) return 1;  // Empty string is a palindrome
+    if (input_length == 0) return 1;
     
     int i, j;
     for (i = 0, j = input_length - 1; i < j; i++, j--) {

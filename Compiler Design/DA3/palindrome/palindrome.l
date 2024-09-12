@@ -17,7 +17,7 @@ int input_length = 0;
     return CHAR;
 }
 \n         { 
-    input_string[input_length] = '\0';  // Null-terminate the string
+    input_string[input_length] = '\0'; 
     return '\n';
 }
 [ \t]      { /* Ignore whitespace */ }
