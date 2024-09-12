@@ -1,4 +1,3 @@
-// Convert int to string
 #include <algorithm>
 #include <cmath>
 #include <iostream>

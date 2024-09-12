@@ -4,12 +4,17 @@ public class MaximumEquilibriumSum {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    int n = sc.nextInt();
-    int sum = 0;
+    String inp = sc.nextLine();
+    // Split on space and convert to integer
+    String[] inpArr = inp.split(" ");
+
+    int n = inpArr.length;
+
     int arr[] = new int[n];
 
+    int sum = 0;
     for (int i = 0; i < n; i++) {
-      arr[i] = sc.nextInt();
+      arr[i] = Integer.parseInt(inpArr[i]);
       sum += arr[i];
     }
 
