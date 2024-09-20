@@ -1,6 +1,22 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#define MAX_PROCESSES 100
+#define MAX_TIMELINE 1000
+
+struct GanttEntry {
+    int pid;
+    int start_time;
+    int end_time;
+};
+
+struct GanttChart {
+    struct GanttEntry entries[MAX_TIMELINE];
+    int count;
+};
+
+struct GanttChart gantt_chart;
+
 struct Process {
   int pid;
   int burst;
@@ -24,35 +40,40 @@ void sortByArrival(struct Process proc[], int n) {
 }
 
 void roundRobinScheduling(struct Process proc[], int n, int quantum) {
-  int currentTime = 0;
-  int completed = 0;
+    int currentTime = 0;
+    int completed = 0;
+    gantt_chart.count = 0;
 
-  while (completed != n) {
-    bool flag = false;
+    while (completed != n) {
+        bool flag = false;
 
-    for (int i = 0; i < n; i++) {
-      if (proc[i].remaining > 0 && proc[i].arrival <= currentTime) {
-        flag = true;
+        for (int i = 0; i < n; i++) {
+            if (proc[i].remaining > 0 && proc[i].arrival <= currentTime) {
+                flag = true;
 
-        if (proc[i].remaining > quantum) {
-          currentTime += quantum;
-          proc[i].remaining -= quantum;
-        } else {
-          currentTime += proc[i].remaining;
-          proc[i].remaining = 0;
-          completed++;
+                int execution_time = (proc[i].remaining > quantum) ? quantum : proc[i].remaining;
+                
+                gantt_chart.entries[gantt_chart.count].pid = proc[i].pid;
+                gantt_chart.entries[gantt_chart.count].start_time = currentTime;
+                gantt_chart.entries[gantt_chart.count].end_time = currentTime + execution_time;
+                gantt_chart.count++;
 
-          proc[i].completion = currentTime;
-          proc[i].turnaround = proc[i].completion - proc[i].arrival;
-          proc[i].waiting = proc[i].turnaround - proc[i].burst;
+                currentTime += execution_time;
+                proc[i].remaining -= execution_time;
+
+                if (proc[i].remaining == 0) {
+                    completed++;
+                    proc[i].completion = currentTime;
+                    proc[i].turnaround = proc[i].completion - proc[i].arrival;
+                    proc[i].waiting = proc[i].turnaround - proc[i].burst;
+                }
+            }
         }
-      }
-    }
 
-    if (!flag) {
-      currentTime++;
+        if (!flag) {
+            currentTime++;
+        }
     }
-  }
 }
 
 void printProcessDetails(struct Process proc[], int n) {
@@ -78,6 +99,47 @@ void printAverages(struct Process proc[], int n) {
 
   printf("\nAverage Turnaround Time: %.2f\n", avg_turnaround_time);
   printf("Average Waiting Time: %.2f\n", avg_waiting_time);
+}
+
+
+void drawGanttChart() {
+    printf("\nGantt Chart:\n");
+    
+    // Print the timeline
+    printf("  ");
+    for (int i = 0; i < gantt_chart.entries[gantt_chart.count - 1].end_time; i++) {
+        printf("--");
+    }
+    printf("\n");
+
+    // Print the process IDs
+    printf(" |");
+    for (int i = 0; i < gantt_chart.count; i++) {
+        int duration = gantt_chart.entries[i].end_time - gantt_chart.entries[i].start_time;
+        for (int j = 0; j < duration; j++) {
+            printf("P%d", gantt_chart.entries[i].pid);
+        }
+        printf("|");
+    }
+    printf("\n");
+
+    // Print the timeline
+    printf("  ");
+    for (int i = 0; i < gantt_chart.entries[gantt_chart.count - 1].end_time; i++) {
+        printf("--");
+    }
+    printf("\n");
+
+    // Print the time markers
+    printf("0");
+    for (int i = 0; i < gantt_chart.count; i++) {
+        int duration = gantt_chart.entries[i].end_time - gantt_chart.entries[i].start_time;
+        for (int j = 0; j < duration; j++) {
+            printf("  ");
+        }
+        printf("%d", gantt_chart.entries[i].end_time);
+    }
+    printf("\n");
 }
 
 int main() {
@@ -108,6 +170,7 @@ int main() {
   printProcessDetails(proc, n);
 
   printAverages(proc, n);
+    drawGanttChart();
 
-  return 0;
+    return 0;
 }

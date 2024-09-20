@@ -357,3 +357,11 @@ UPDATE employee SET TempSalary = Salary;
 ALTER TABLE employee DROP COLUMN Salary;
 ALTER TABLE employee RENAME COLUMN TempSalary TO Salary;
 
+
+-- DA2
+-- Ex1
+
+SELECT FName, Minit, LName
+FROM employee
+WHERE Salary > 25000
+ORDER BY LName, FName;

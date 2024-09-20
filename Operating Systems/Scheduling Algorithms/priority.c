@@ -10,7 +10,19 @@ struct Process {
   int completion;
   int turnaround;
   int waiting;
+  int start_time;  // New field to track when the process starts execution
 };
+
+// Global array to store the Gantt chart
+struct GanttEntry {
+  int pid;
+  int start_time;
+  int end_time;
+};
+
+#define MAX_GANTT_ENTRIES 1000
+struct GanttEntry gantt_chart[MAX_GANTT_ENTRIES];
+int gantt_entries = 0;
 
 void sortByArrivalTime(struct Process proc[], int n) {
   for (int i = 0; i < n - 1; i++) {
@@ -50,20 +62,39 @@ void priorityScheduling(struct Process proc[], int n) {
 
     if (idx != -1) {
       if (proc[idx].remaining == proc[idx].burst) {
+        proc[idx].start_time = current_time;
         proc[idx].waiting = current_time - proc[idx].arrival;
       }
-      proc[idx].remaining--;
-      current_time++;
+      
+      int execution_time = (proc[idx].remaining < 1) ? proc[idx].remaining : 1;
+      
+      // Add Gantt chart entry
+      gantt_chart[gantt_entries].pid = proc[idx].pid;
+      gantt_chart[gantt_entries].start_time = current_time;
+      gantt_chart[gantt_entries].end_time = current_time + execution_time;
+      gantt_entries++;
+
+      proc[idx].remaining -= execution_time;
+      current_time += execution_time;
       prev = current_time;
 
       if (proc[idx].remaining == 0) {
         completed++;
         proc[idx].completion = current_time;
-        proc[idx].turnaround =
-            proc[idx].completion - proc[idx].arrival;
+        proc[idx].turnaround = proc[idx].completion - proc[idx].arrival;
       }
     } else {
       current_time++;
+      
+      // Add idle time to Gantt chart
+      if (gantt_entries == 0 || gantt_chart[gantt_entries-1].pid != 0) {
+        gantt_chart[gantt_entries].pid = 0;  // 0 represents idle time
+        gantt_chart[gantt_entries].start_time = current_time - 1;
+        gantt_chart[gantt_entries].end_time = current_time;
+        gantt_entries++;
+      } else {
+        gantt_chart[gantt_entries-1].end_time = current_time;
+      }
     }
   }
 }
@@ -77,6 +108,43 @@ void print_table(struct Process processes[], int n) {
            processes[i].completion, processes[i].turnaround,
            processes[i].waiting);
   }
+}
+
+void print_gantt_chart() {
+  printf("\nGantt Chart:\n");
+  printf("0");
+  for (int i = 0; i < gantt_entries; i++) {
+    for (int j = 0; j < (gantt_chart[i].end_time - gantt_chart[i].start_time) * 3; j++) {
+      printf("-");
+    }
+    printf(" ");
+  }
+  printf("\n|");
+  for (int i = 0; i < gantt_entries; i++) {
+    for (int j = 0; j < (gantt_chart[i].end_time - gantt_chart[i].start_time) * 3 - 1; j++) {
+      if (j == (gantt_chart[i].end_time - gantt_chart[i].start_time) * 3 / 2 - 1) {
+        printf("%d", gantt_chart[i].pid);
+      } else {
+        printf(" ");
+      }
+    }
+    printf("|");
+  }
+  printf("\n");
+  for (int i = 0; i < gantt_entries; i++) {
+    for (int j = 0; j < (gantt_chart[i].end_time - gantt_chart[i].start_time) * 3; j++) {
+      printf("-");
+    }
+    printf(" ");
+  }
+  printf("\n");
+  for (int i = 0; i < gantt_entries; i++) {
+    printf("%-3d", gantt_chart[i].end_time);
+    for (int j = 1; j < (gantt_chart[i].end_time - gantt_chart[i].start_time) * 3; j++) {
+      printf(" ");
+    }
+  }
+  printf("\n");
 }
 
 
@@ -118,5 +186,6 @@ int main() {
   printf("\nAverage Turnaround Time: %.2f", avg_turnaround_time);
   printf("\nAverage Waiting Time: %.2f\n", avg_waiting_time);
 
+  print_gantt_chart();
   return 0;
 }

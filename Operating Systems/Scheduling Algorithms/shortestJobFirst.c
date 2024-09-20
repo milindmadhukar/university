@@ -1,6 +1,9 @@
 #include <limits.h>
 #include <stdio.h>
 
+#define MAX_PROCESSES 100
+int gantt_chart[MAX_PROCESSES * 2][2];
+int gantt_size = 0;
 struct Process {
   int id;
   int arrival_time;
@@ -44,6 +47,10 @@ void calculateTimes(struct Process proc[], int n) {
     if (shortest_job == -1) {
       current_time++;
     } else {
+      gantt_chart[gantt_size][0] = proc[shortest_job].id;
+      gantt_chart[gantt_size][1] = current_time;
+      gantt_size++;
+
       proc[shortest_job].completion_time =
           current_time + proc[shortest_job].burst_time;
 
@@ -53,9 +60,9 @@ void calculateTimes(struct Process proc[], int n) {
       proc[shortest_job].waiting_time =
           proc[shortest_job].turnaround_time - proc[shortest_job].burst_time;
 
-      proc[shortest_job].burst_time = 0;
-
       current_time = proc[shortest_job].completion_time;
+
+      proc[shortest_job].burst_time = 0;
       completed++;
     }
   }
@@ -87,6 +94,19 @@ float calculateAverageTurnaroundTime(struct Process proc[], int n) {
   return total_turnaround_time / n;
 }
 
+void printGanttChart(struct Process proc[]) {
+  printf("\nGantt Chart:\n");
+  for (int i = 0; i < gantt_size; i++) {
+    printf("| P%d ", gantt_chart[i][0]);
+  }
+  printf("|\n");
+  for (int i = 0; i < gantt_size; i++) {
+    printf("%d    ", gantt_chart[i][1]);
+  }
+  printf("%d\n", gantt_chart[gantt_size - 1][1] + 
+         proc[gantt_chart[gantt_size - 1][0] - 1].burst_time);
+}
+
 int main() {
   int n;
 
@@ -114,6 +134,8 @@ int main() {
 
   printf("\nAverage Waiting Time: %.2f", avg_waiting_time);
   printf("\nAverage Turnaround Time: %.2f\n", avg_turnaround_time);
+
+  printGanttChart(proc);
 
   return 0;
 }
