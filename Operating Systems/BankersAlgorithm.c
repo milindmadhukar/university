@@ -42,7 +42,10 @@ int main() {
     for (int j = 0; j < num_processes; j++) {
       available[i] -= allocation[j][i];
     }
+
+    printf("%d", available[i]);
   }
+
 
   int resource_available_status[num_resources];
 
