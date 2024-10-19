@@ -4,7 +4,7 @@ public class LongestSequenceOfOnesAfterFlippingBit {
 
   public static int flipBit(int n) {
     if (~n == 0)
-      return 32;
+      return Integer.SIZE;
 
     int currentLength = 0;
     int previousLength = 0;

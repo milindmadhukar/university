@@ -6,6 +6,7 @@ public class BoothsAlgorithm {
     int A = n1;
     int P = 0;
     int count = Integer.SIZE;
+
     while (count > 0) {
       if ((r & 1) == 1) {
         P += A;

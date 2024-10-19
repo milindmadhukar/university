@@ -1,36 +1,37 @@
 import java.util.Scanner;
 
 public class MaximumEquilibriumSum {
+  public static int getMaxEquilibriumSumOptimized(int[] arr) {
+    int totalSum = 0;
+    int leftSum = 0;
+    int maxSum = Integer.MIN_VALUE;
+    for (int i = 0; i < arr.length; i++) {
+      totalSum += arr[i];
+    }
+    for (int i = 0; i < arr.length; i++) {
+
+      totalSum -= arr[i];
+      if (leftSum == totalSum && leftSum > maxSum) {
+        maxSum = leftSum;
+      }
+      leftSum += arr[i];
+    }
+    return maxSum;
+  }
+
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    String inp = sc.nextLine();
-    // Split on space and convert to integer
-    String[] inpArr = inp.split(" ");
-
-    int n = inpArr.length;
-
-    int arr[] = new int[n];
-
-    int sum = 0;
+    String[] input = sc.nextLine().split(" ");
+    int n = input.length;
+    int[] arr = new int[n];
     for (int i = 0; i < n; i++) {
-      arr[i] = Integer.parseInt(inpArr[i]);
-      sum += arr[i];
+      arr[i] = Integer.parseInt(input[i]);
     }
 
-    int sum1 = 0, sum2 = sum;
-    int maxIndex = -1;
-
-    for (int i = 0; i < n; i++) {
-      sum1 += arr[i];
-      sum2 -= arr[i];
-
-      if (sum1 == sum2) {
-        maxIndex = i;
-      }
-    }
-
-    System.out.println(maxIndex + 1);
     sc.close();
+    int maxSum = getMaxEquilibriumSumOptimized(arr);
+    System.out.println(maxSum);
   }
+
 }
