@@ -26,15 +26,25 @@ public class MaxProductSubarray {
     return m;
   }
 
+  static long findProd(int[] arr, int i, int j) {
+    long prod = 1;
+    for (int k = i; k < j; k++) {
+      prod *= arr[k];
+    }
+    return prod;
+  }
+
   public static long maximumProductSubarrayBruteforce(int[] arr) {
-    int max = 0;
+    long max = 0;
     int n = arr.length;
 
     for (int i = 0; i < n; i++) {
       for (int j = i + 1; j < n - 1; j++) {
-
+        max = Math.max(max, findProd(arr, i, j));
       }
     }
+
+    return max;
 
   }
 
