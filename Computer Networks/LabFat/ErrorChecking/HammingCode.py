@@ -1,44 +1,69 @@
-import math
+def calcRedundantBits(m):
+	for i in range(m):
+		if(2**i >= m + i + 1):
+			return i
 
-# For a given length of data, gives number of parity bits needed.
-def calculate_redundant_bits(m):
-    for i in range(m):
-        if(2**i >= m + i + 1):
-            return i
+def posRedundantBits(data, r):
+	j = 0
+	k = 1
+	m = len(data)
+	res = ''
+	for i in range(1, m + r+1):
+		if(i == 2**j):
+			res = res + '0'
+			j += 1
+		else:
+			res = res + data[-1 * k]
+			k += 1
 
-# For a given data. Positions the redundant bits and initializes them to be 0
-def position_redundant_bits(data, r):
-    j = 0
-    k = 1
-    m = len(data)
-    res = ''
-
-    for i in range(1, m + r + 1):
-        if(i == 2**j):
-            res += '0'
-            j += 1
-        else:
-            res += data[k-1]
-            k += 1
-
-    return res
-
-def get_even_parity_bit(bits):
-    count = list(bits).count(1)
-    return (count & 1)
+	return res[::-1]
 
 
-def calculate_redundant_bits(data):
-    i = 0
-    for idx, bit in enumerate(data):
-        if idx+1 == 2**i:
-            i += 1
-            concerned_bits = []
-            for loc, bit in enumerate(data):
-                if(bit & i and loc + 1 != i):
-                    concerned_bits.append(data[idx])
-            data[idx] = get_even_parity_bit(concerned_bits)
-        
-    return data  
+def calcParityBits(arr, r):
+	n = len(arr)
 
+	for i in range(r):
+		val = 0
+		for j in range(1, n + 1):
+
+			if(j & (2**i) == (2**i)):
+				val = val ^ int(arr[-1 * j])
+
+		arr = arr[:n-(2**i)] + str(val) + arr[n-(2**i)+1:]
+	return arr
+
+
+def detectError(arr, nr):
+	n = len(arr)
+	res = 0
+
+	for i in range(nr):
+		val = 0
+		for j in range(1, n + 1):
+			if(j & (2**i) == (2**i)):
+				val = val ^ int(arr[-1 * j])
+
+		res = res + val*(10**i)
+
+	return int(str(res), 2)
+
+
+data = '1011'
+
+m = len(data)
+r = calcRedundantBits(m)
+
+arr = posRedundantBits(data, r)
+
+arr = calcParityBits(arr, r)
+
+print("Data transferred is " + arr) 
+
+arr = '1000101'
+print("Error Data is " + arr)
+correction = detectError(arr, r)
+if(correction==0):
+	print("There is no error in the received message.")
+else:
+	print("The position of error is ",len(arr)-correction+1,"from the left")
 

@@ -1,13 +1,11 @@
 def get_ip_class(ip_address):
     octets = ip_address.split(".")
-    # Convert the first octet to an integer
     try:
         first_octet = int(octets[0])
     except ValueError:
         return "Invalid IP", "N/A"
     
-    # Check the class based on the first octet
-    if 1 <= first_octet <= 126:
+    if 1 <= first_octet <= 127:
         return "Class A", "255.0.0.0"
     elif 128 <= first_octet <= 191:
         return "Class B", "255.255.0.0"
@@ -15,11 +13,10 @@ def get_ip_class(ip_address):
         return "Class C", "255.255.255.0"
     elif 224 <= first_octet <= 239:
         return "Class D (Multicast)", "N/A"
-    elif 240 <= first_octet <= 254:
-        return "Class E (Experimental)", "N/A"
+    elif 240 <= first_octet <= 255:
+        return "Class E (Reserved)", "N/A"
     else:
         return "Invalid IP", "N/A"
-
 def main():
     print("IPv4 Class Identification and Default Subnet Mask")
     ip_address = input("Enter an IPv4 address: ")
