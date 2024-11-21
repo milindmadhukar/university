@@ -13,18 +13,14 @@ struct Process {
   int waiting_time;
 };
 
-
-void swap(struct Process *a, struct Process *b) {
-  struct Process temp = *a;
-  *a = *b;
-  *b = temp;
-}
-
-void sortByArrivalTime(struct Process processes[], int n) {
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (processes[i].arrival_time > processes[j].arrival_time) {
-        swap(&processes[i], &processes[j]);
+void sortProcesses(struct Process proc[], int n) {
+  int i, j;
+  for (i = 0; i < n - 1; i++) {
+    for (j = 0; j < n - i - 1; j++) {
+      if (proc[j].arrival_time > proc[j + 1].arrival_time) {
+        struct Process temp = proc[j];
+        proc[j] = proc[j + 1];
+        proc[j + 1] = temp;
       }
     }
   }
@@ -107,8 +103,8 @@ void printGanttChart(struct Process proc[]) {
   for (int i = 0; i < gantt_size; i++) {
     printf("%d    ", gantt_chart[i][1]);
   }
-  printf("%d\n", gantt_chart[gantt_size - 1][1] +
-                     proc[gantt_chart[gantt_size - 1][0] - 1].burst_time);
+  printf("%d\n", gantt_chart[gantt_size - 1][1] + 
+         proc[gantt_chart[gantt_size - 1][0] - 1].burst_time);
 }
 
 int main() {
@@ -127,7 +123,7 @@ int main() {
     scanf("%d", &proc[i].burst_time);
   }
 
-  sortByArrivalTime(proc, n);
+  sortProcesses(proc, n);
   calculateTimes(proc, n);
 
   printf("\nShortest Job First (SJF) Scheduling:\n");

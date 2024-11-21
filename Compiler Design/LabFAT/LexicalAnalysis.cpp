@@ -13,7 +13,8 @@ unordered_set<string> keywords = {
     "float",    "for",    "goto",    "if",     "int",      "long",
     "register", "return", "short",   "signed", "sizeof",   "static",
     "struct",   "switch", "typedef", "union",  "unsigned", "void",
-    "volatile", "while"};
+    "volatile", "while"
+};
 
 unordered_set<char> operators = {'=', '+', '-', '*', '/', '%'};
 
@@ -30,11 +31,12 @@ bool isDelimiter(char ch) { return delimiters.find(ch) != delimiters.end(); }
 void lexicalAnalysis(const string &input) {
   vector<string> variables, literals, operatorTokens, constants, keywordTokens,
       specialSymbols;
+
   istringstream iss(input);
   string line, token;
 
   while (getline(iss, line)) {
-    for (size_t i = 0; i < line.size();) {
+    for (int i = 0; i < line.size();) {
       if (isspace(line[i])) {
         ++i;
         continue;
@@ -109,3 +111,4 @@ int main() {
   lexicalAnalysis(input);
   return 0;
 }
+
