@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="sample.Controller">
+    <children>
+        <Label fx:id="label" layoutX="20.0" layoutY="20.0" text="Hello, FXML!" />
+        <Button layoutX="20.0" layoutY="60.0" text="Click Me" onAction="#handleButtonClick"/>
+    </children>
+</AnchorPane>

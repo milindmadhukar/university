@@ -1,0 +1,19 @@
+{
+    "name": "Java Development",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "java-dev",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "redhat.java",
+          "vscjava.vscode-java-pack",
+          "vscjava.vscode-java-dependency"
+        ],
+        "settings": {
+          "java.home": "/usr/local/openjdk-17"
+        }
+      }
+    },
+    "remoteUser": "root"
+  }

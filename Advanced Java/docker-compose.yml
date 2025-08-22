@@ -1,0 +1,14 @@
+services:
+  java-dev:
+    image: openjdk:17-jdk-slim
+    container_name: java-dev-env
+    working_dir: /workspace
+    volumes:
+      - ./src:/workspace
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+    environment:
+      - JAVA_HOME=/usr/local/openjdk-21
+      - PATH=/usr/local/openjdk-21/bin:$PATH
+    user: "${UID:-1000}:${GID:-1000}"
