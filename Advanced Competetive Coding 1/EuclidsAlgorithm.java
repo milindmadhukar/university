@@ -18,7 +18,8 @@ public class EuclidsAlgorithm {
     if (b == 0) {
       return a;
     }
-    return gcd(b, a % b);
+    int r = a % b;
+    return gcd(b, r);
   }
 }
 

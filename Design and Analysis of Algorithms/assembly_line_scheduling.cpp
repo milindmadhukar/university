@@ -1,47 +1,72 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <algorithm>
+#include <iostream>
+#define N 5
 
-int assembly(
-    int a[][4], int t[][4], int *e,
-    int *x) // references to entry and exit taken because array size not defined
-{
-  int line_one, line_two, i;
+int costs[2][N];
+int transfers[2][N - 1];
 
-  // calculates cost of first station in line 1
-  // stores the minimum cost of line 1 traversal
-  line_one = e[0] + a[0][0];
-
-  // calculates cost of second station in line 2
-  // stores the minimum cost of line 2 traversal
-  line_two = e[1] + a[1][0];
-
-  // Fill tables T1[] and T2[] using the
-  // above given recursive relations
-  for (i = 1; i < 4; ++i) {
-    int moveup =
-        min(line_one + a[0][i],
-            line_two + t[1][i] +
-                a[0][i]); // calculates minimum cost for moving up the line 1
-    int movedown =
-        min(line_two + a[1][i],
-            line_one + t[0][i] +
-                a[1][i]); // calculates minimum cost for moving up the line 2
-    line_one = moveup;
-    line_two = movedown;
+// FIX: This is broken
+void printPath(int idx, int currentLine) {
+  if (idx == 0) {
+    return;
   }
 
-  return min(line_one + x[0], line_two + x[1]);
+  printPath(idx - 1, transfers[currentLine][idx-1]);
+  std::cout << "Station " << idx << " Line " << currentLine + 1 << std::endl;
+}
+
+void assembly_line_cost(int station1[N], int station2[N], int transfer1[N],
+                        int transfer2[N], int entry1, int entry2, int exit1,
+                        int exit2) {
+
+  costs[0][0] = entry1 + station1[0];
+  costs[1][0] = entry2 + station2[0];
+
+  for (int stage = 1; stage < N; stage++) {
+    int station1Direct = costs[0][stage - 1] + station1[stage];
+    int station1Transfer =
+        costs[0][stage - 1] + transfer1[stage - 1] + station2[stage];
+    costs[0][stage] = std::min(station1Direct, station1Transfer);
+
+    if (station1Direct < station1Transfer) {
+      transfers[0][stage - 1] = 0;
+    } else {
+      transfers[0][stage - 1] = 1;
+    }
+
+    int station2Direct = costs[1][stage - 1] + station2[stage];
+    int station2Transfer =
+        costs[1][stage - 1] + transfer2[stage - 1] + station1[stage];
+    costs[1][stage] = std::min(station1Direct, station1Transfer);
+
+    if (station2Direct < station2Transfer) {
+      transfers[1][stage - 1] = 1;
+    } else {
+      transfers[1][stage - 1] = 0;
+    }
+  }
+
+  int station1Total = costs[0][N - 1] + exit1;
+  int station2Total = costs[1][N - 1] + exit2;
+  int minCost = std::min(station1Total, station2Total);
+
+  int cheaperLine = station1Total <= station2Total ? 0 : 1;
+
+  std::cout << "Total cost: " << minCost << std::endl;
+
+  printPath(N, cheaperLine);
 }
 
 int main() {
-  int entrycost[] = {10, 12}; // cost of entry
-  int stationcost[][4] = {{4, 5, 3, 2},
-                          {2, 10, 1, 4}}; // cost of indivisual stations
-  int transitioncost[][4] = {
-      {0, 7, 4, 5}, {0, 9, 2, 8}}; // transition cost between stations of lines
-  int exitcost[] = {18, 7};        // exit cost
+  int station1[] = {8, 10, 4, 5, 9};
+  int station2[] = {9, 6, 7, 6, 5};
+  int transfer1[] = {2, 3, 1, 3};
+  int transfer2[] = {2, 1, 2, 2};
+  int entry1 = 3;
+  int entry2 = 5;
+  int exit1 = 2;
+  int exit2 = 1;
 
-  cout << assembly(stationcost, transitioncost, entrycost, exitcost);
-
-  return 0;
+  assembly_line_cost(station1, station2, transfer1, transfer2, entry1, entry2,
+                     exit1, exit2);
 }

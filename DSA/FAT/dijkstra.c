@@ -52,8 +52,6 @@ void dijkstra(struct Node *start) {
 
     for (int i = 0; i < 100; i++) {
       if (current->adjacents[i] != NULL) {
-        struct Node *to = current->adjacents[i]->to;
-        int weight = current->adjacents[i]->weight;
 
         if (to->visited == false && to->distance < min) {
           min = to->distance;
