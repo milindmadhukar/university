@@ -30,7 +30,7 @@ void NQueens(int k, int n, int *x) {
 
 int main() {
   int n = 4;
-  int x[n];
+  int *x = new int[n];
   NQueens(0, n, x);
 
   return 0;

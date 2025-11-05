@@ -36,25 +36,17 @@ void printParenthesis(int i, int j, int **split) {
 
 int main() {
   int n;
-
-  cout << "Enter the number of matrices: ";
   cin >> n;
-
-  if (n <= 0) {
-    cout << "Invalid number of matrices!" << endl;
-    return 1;
-  }
 
   int *matrices = new int[n + 1];
 
-  cout << "Enter " << (n + 1) << " dimensions: ";
   for (int i = 0; i <= n; i++) {
     cin >> matrices[i];
   }
 
-  // Dynamically allocate 2D dp and split arrays
   int **dp = new int *[n + 1];
   int **split = new int *[n + 1];
+
   for (int i = 0; i <= n; i++) {
     dp[i] = new int[n + 1];
     split[i] = new int[n + 1];

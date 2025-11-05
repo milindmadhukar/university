@@ -16,7 +16,7 @@ string convert_to_string(long long n) {
     n = -n;
 
   while (n > 0) {
-    s += (n % 10) + '0';
+    s += n % 10 + '0'; // Number + 48 to make it into a char
     n /= 10;
   }
 

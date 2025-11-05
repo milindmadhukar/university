@@ -15,8 +15,8 @@ int knapSack(int W, int weights[], int profits[], int n, int **dp) {
       if (weights[i - 1] > w) {
         dp[i][w] = dp[i - 1][w];
       } else {
-        dp[i][w] = max(profits[i - 1] + dp[i - 1][w - weights[i - 1]],
-                            dp[i - 1][w]);
+        dp[i][w] =
+            max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
       }
     }
   }
@@ -32,8 +32,7 @@ void printSelectedItems(int n, int W, int total_profit, int weights[],
       continue;
     } else {
       cout << "Item " << i << " with weight " << weights[i - 1]
-                << " and profit " << profits[i - 1] << " is selected"
-                << endl;
+           << " and profit " << profits[i - 1] << " is selected" << endl;
       total_profit -= profits[i - 1];
       w -= weights[i - 1];
     }
@@ -42,33 +41,18 @@ void printSelectedItems(int n, int W, int total_profit, int weights[],
 
 int main() {
   int n, W;
-
-  cout << "Enter the number of items: ";
   cin >> n;
 
-  if (n <= 0) {
-    cout << "Invalid number of items!" << endl;
-    return 1;
-  }
-
-  cout << "Enter the capacity of knapsack: ";
+  // Knapscak capacity
   cin >> W;
 
-  if (W <= 0) {
-    cout << "Invalid capacity!" << endl;
-    return 1;
-  }
-
-  // Dynamically allocate arrays
   int *profits = new int[n];
   int *weights = new int[n];
 
-  cout << "\nEnter profits of " << n << " items: ";
   for (int i = 0; i < n; i++) {
     cin >> profits[i];
   }
 
-  cout << "Enter weights of " << n << " items: ";
   for (int i = 0; i < n; i++) {
     cin >> weights[i];
   }

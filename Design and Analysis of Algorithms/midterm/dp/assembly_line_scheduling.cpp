@@ -23,29 +23,28 @@ void assembly_line_cost(int *station1, int *station2, int *transfer1,
   transfers[0] = new int[N - 1];
   transfers[1] = new int[N - 1];
 
+  // costs[line][stage]
+
   costs[0][0] = entry1 + station1[0];
   costs[1][0] = entry2 + station2[0];
 
   for (int stage = 1; stage < N; stage++) {
     int station1Direct = costs[0][stage - 1] + station1[stage];
+
     int station1Transfer =
         costs[1][stage - 1] + transfer2[stage - 1] + station1[stage];
     costs[0][stage] = min(station1Direct, station1Transfer);
-    if (station1Direct <= station1Transfer) {
-      transfers[0][stage - 1] = 0; // stayed on line 0
-    } else {
-      transfers[0][stage - 1] = 1; // came from line 1
-    }
+
+    transfers[0][stage - 1] = (station1Direct <= station1Transfer) ? 0 : 1;
 
     int station2Direct = costs[1][stage - 1] + station2[stage];
+
     int station2Transfer =
         costs[0][stage - 1] + transfer1[stage - 1] + station2[stage];
+
     costs[1][stage] = min(station2Direct, station2Transfer);
-    if (station2Direct <= station2Transfer) {
-      transfers[1][stage - 1] = 1; // stayed on line 1
-    } else {
-      transfers[1][stage - 1] = 0; // came from line 0
-    }
+
+    transfers[1][stage - 1] = (station2Direct <= station2Transfer) ? 1 : 0;
   }
 
   int station1Total = costs[0][N - 1] + exit1;
@@ -71,12 +70,6 @@ int main() {
   cout << "Enter the number of stations: ";
   cin >> N;
 
-  if (N <= 0) {
-    cout << "Invalid number of stations!" << endl;
-    return 1;
-  }
-
-  // Dynamically allocate arrays
   int *station1 = new int[N];
   int *station2 = new int[N];
   int *transfer1 = new int[N - 1];
@@ -92,8 +85,7 @@ int main() {
     cin >> station2[i];
   }
 
-  cout << "\nEnter " << (N - 1)
-            << " transfer costs from Line 1 to Line 2: ";
+  cout << "\nEnter " << (N - 1) << " transfer costs from Line 1 to Line 2: ";
   for (int i = 0; i < N - 1; i++) {
     cin >> transfer1[i];
   }
