@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${book.id != null} ? 'Edit Book - Library Management' : 'Add Book - Library Management'">Library Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-book text-2xl"></i>
+                <h1 class="text-xl font-bold">Library Management System</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="/" class="hover:text-blue-200 transition-colors">
+                    <i class="fas fa-home mr-1"></i> Home
+                </a>
+                <a href="/books/add" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition-colors">
+                    <i class="fas fa-plus mr-1"></i> Add Book
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6 max-w-2xl">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800" th:text="${book.id != null} ? 'Edit Book' : 'Add New Book'"></h2>
+                    <p class="text-gray-600 mt-1" th:text="${book.id != null} ? 'Update book information' : 'Enter book details to add to the library'"></p>
+                </div>
+                <a href="/" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Library
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div th:if="${successMessage}" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span th:text="${successMessage}"></span>
+        </div>
+        
+        <div th:if="${errorMessage}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <i class="fas fa-exclamation-circle mr-2"></i>
+            <span th:text="${errorMessage}"></span>
+        </div>
+
+        <!-- Book Form -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <form th:action="${book.id != null} ? @{/books/edit/{id}(id=${book.id})} : @{/books/add}" 
+                  th:object="${book}" 
+                  method="post" 
+                  class="space-y-6">
+                
+                <!-- Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-book mr-2"></i>Title *
+                    </label>
+                    <input type="text" 
+                           id="title"
+                           th:field="*{title}" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter book title"
+                           required>
+                    <div th:if="${#fields.hasErrors('title')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{title}"></span>
+                    </div>
+                </div>
+
+                <!-- Author -->
+                <div>
+                    <label for="author" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user mr-2"></i>Author *
+                    </label>
+                    <input type="text" 
+                           id="author"
+                           th:field="*{author}" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter author name"
+                           required>
+                    <div th:if="${#fields.hasErrors('author')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{author}"></span>
+                    </div>
+                </div>
+
+                <!-- ISBN -->
+                <div>
+                    <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-barcode mr-2"></i>ISBN *
+                    </label>
+                    <input type="text" 
+                           id="isbn"
+                           th:field="*{isbn}" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter ISBN (e.g., 978-0123456789)"
+                           required>
+                    <div th:if="${#fields.hasErrors('isbn')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{isbn}"></span>
+                    </div>
+                </div>
+
+                <!-- Genre -->
+                <div>
+                    <label for="genre" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-tag mr-2"></i>Genre
+                    </label>
+                    <select id="genre" 
+                            th:field="*{genre}" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select a genre</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Biography">Biography</option>
+                        <option value="History">History</option>
+                        <option value="Self-Help">Self-Help</option>
+                        <option value="Business">Business</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Education">Education</option>
+                        <option value="Children">Children</option>
+                        <option value="Young Adult">Young Adult</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('genre')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{genre}"></span>
+                    </div>
+                </div>
+
+                <!-- Publication Date -->
+                <div>
+                    <label for="publicationDate" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-calendar mr-2"></i>Publication Date
+                    </label>
+                    <input type="date" 
+                           id="publicationDate"
+                           th:field="*{publicationDate}" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <div th:if="${#fields.hasErrors('publicationDate')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{publicationDate}"></span>
+                    </div>
+                </div>
+
+                <!-- Total Copies -->
+                <div>
+                    <label for="totalCopies" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-clone mr-2"></i>Total Copies *
+                    </label>
+                    <input type="number" 
+                           id="totalCopies"
+                           th:field="*{totalCopies}" 
+                           min="1"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter number of copies"
+                           required>
+                    <div th:if="${#fields.hasErrors('totalCopies')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{totalCopies}"></span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-align-left mr-2"></i>Description
+                    </label>
+                    <textarea id="description"
+                              th:field="*{description}" 
+                              rows="4"
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Enter book description (optional)"></textarea>
+                    <div th:if="${#fields.hasErrors('description')}" class="text-red-600 text-sm mt-1">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        <span th:errors="*{description}"></span>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-4 pt-4">
+                    <button type="submit" 
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-save mr-2"></i>
+                        <span th:text="${book.id != null} ? 'Update Book' : 'Add Book'"></span>
+                    </button>
+                    <a href="/" 
+                       class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-lg font-medium text-center transition-colors">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Form Help -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+            <h3 class="text-blue-800 font-medium mb-2">
+                <i class="fas fa-info-circle mr-2"></i>Form Guidelines
+            </h3>
+            <ul class="text-blue-700 text-sm space-y-1">
+                <li>• Fields marked with * are required</li>
+                <li>• ISBN should be unique for each book</li>
+                <li>• Total copies will determine initial available copies</li>
+                <li>• Description is optional but helps with book identification</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+        <p>&copy; 2025 Library Management System. Built with Spring Boot & Tailwind CSS.</p>
+    </footer>
+</body>
+</html>

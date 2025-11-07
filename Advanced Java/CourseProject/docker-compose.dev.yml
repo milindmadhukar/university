@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # Spring Boot Application for Development
+  library-app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: library-management-app-dev
+    ports:
+      - "8080:8080"    # Application port
+      - "5005:5005"    # Debug port
+      - "35729:35729"  # LiveReload port
+    environment:
+      # Database configuration - connects to host PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/java_project
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      
+      # JPA configuration for development
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      
+      # Development profile
+      SPRING_PROFILES_ACTIVE: dev
+      
+      # DevTools configuration
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "true"
+      SPRING_DEVTOOLS_RESTART_POLL_INTERVAL: 2s
+      SPRING_DEVTOOLS_RESTART_QUIET_PERIOD: 1s
+      
+      # Thymeleaf development configuration
+      SPRING_THYMELEAF_CACHE: "false"
+      SPRING_THYMELEAF_PREFIX: file:src/main/resources/templates/
+      
+      # Logging configuration
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: DEBUG
+      LOGGING_LEVEL_ORG_HIBERNATE_TYPE_DESCRIPTOR_SQL_BASICBINDER: TRACE
+      LOGGING_LEVEL_COM_UNIVERSITY_LIBRARY: DEBUG
+      
+      # Server configuration
+      SERVER_PORT: 8080
+      
+      # Actuator configuration
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics
+      
+      # JVM options for development
+      JAVA_OPTS: "-Xmx512m -Xms256m -XX:+UseG1GC"
+    
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src:rw
+      - maven_cache:/root/.m2
+    
+    restart: unless-stopped
+    
+    # Health check for the application
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+
+volumes:
+  maven_cache:
+    name: library_maven_cache

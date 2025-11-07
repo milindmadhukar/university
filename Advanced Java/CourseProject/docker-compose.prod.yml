@@ -1,0 +1,51 @@
+services:
+  library-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: library-management-app
+    ports:
+      - "8082:8080"
+    environment:
+      # Database configuration - connects to host PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://172.17.0.1:5432/java_project
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      
+      # JPA configuration for production
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "false"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "false"
+      
+      # Production profile
+      SPRING_PROFILES_ACTIVE: prod
+      
+      # Server configuration
+      SERVER_PORT: 8080
+      
+      # Thymeleaf configuration for production
+      SPRING_THYMELEAF_CACHE: "true"
+      
+      # Logging configuration for production
+      LOGGING_LEVEL_ROOT: WARN
+      LOGGING_LEVEL_COM_UNIVERSITY_LIBRARY: INFO
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: WARN
+      
+      # Actuator configuration (limited exposure for production)
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info
+      MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: when_authorized
+      
+      # JVM options for production
+      JAVA_OPTS: "-Xmx1024m -Xms512m -XX:+UseG1GC -XX:+UseStringDeduplication"
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+# No volumes needed since using host PostgreSQL
