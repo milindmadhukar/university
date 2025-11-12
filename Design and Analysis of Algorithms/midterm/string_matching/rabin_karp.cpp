@@ -3,77 +3,71 @@ using namespace std;
 
 #define d 26
 
-bool check = true;
+bool found = false;
 
-void search(char pat[], char txt[], int q) {
-  int M = strlen(pat);
-  int N = strlen(txt);
-  int i, j;
-  int p = 0; // hash value for pattern
-  int t = 0; // hash value for current text window
+void search(const string &pat, const string &txt, int q) {
+  int M = pat.length();
+  int N = txt.length();
+  int p = 0; // hash for pattern
+  int t = 0; // hash for current window of text
   int h = 1;
 
-  // The value of h is "pow(d, M-1) % q"
-  for (i = 0; i < M - 1; i++)
+  // The value of h = pow(d, M-1) % q
+  for (int i = 0; i < M - 1; i++)
     h = (h * d) % q;
 
-  for (i = 0; i < M; i++) {
+  // Calculate initial hash values
+  for (int i = 0; i < M; i++) {
     p = (d * p + (pat[i] - 'A')) % q;
     t = (d * t + (txt[i] - 'A')) % q;
   }
 
-  for (i = 0; i <= N - M; i++) {
+  // Slide the pattern over the text
+  for (int i = 0; i <= N - M; i++) {
+    // Check hash match
     if (p == t) {
-      for (j = 0; j < M; j++) {
-        if (txt[i + j] != pat[j]) {
+      int j = 0;
+      for (; j < M; j++) {
+        if (txt[i + j] != pat[j])
           break;
-        }
       }
-
       if (j == M) {
-        check = false; // Pattern found
-        cout << "Pattern found at index " << i << endl;
+        found = true;
+        cout << "Pattern found at index " << i << '\n';
       }
     }
 
+    // Compute hash for next window
     if (i < N - M) {
       t = (d * (t - (txt[i] - 'A') * h) + (txt[i + M] - 'A')) % q;
-
       if (t < 0)
-        t = (t + q);
+        t += q;
     }
   }
 }
 
 int main() {
-  char txt[] = "saqspapGPGGAS";
-  char pat[] = "pcGa";
-
-  int n = strlen(txt);
-  int m = strlen(pat);
+  string txt = "saqspapGPGGAS";
+  string pat = "pcGa";
 
   cout << "Original Text: " << txt << endl;
   cout << "Original Pattern: " << pat << endl;
 
-  for (int i = 0; i < n; i++) {
-    txt[i] = toupper(txt[i]);
-  }
-  for (int i = 0; i < m; i++) {
-    pat[i] = toupper(pat[i]);
-  }
+  // Convert both to uppercase
+  transform(txt.begin(), txt.end(), txt.begin(), ::toupper);
+  transform(pat.begin(), pat.end(), pat.begin(), ::toupper);
 
   cout << "Uppercase Text: " << txt << endl;
   cout << "Uppercase Pattern: " << pat << endl;
 
   int q;
-  cout << "Enter a prime number for the modulus (q) (e.g., 101): ";
+  cout << "Enter a prime number for modulus (e.g., 101): ";
   cin >> q;
 
   search(pat, txt, q);
 
-  if (check) {
-    std::cout << "Pattern Not found" << std::endl;
-  }
+  if (!found)
+    cout << "Pattern Not Found" << endl;
 
   return 0;
 }
